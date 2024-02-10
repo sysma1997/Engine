@@ -1,0 +1,5 @@
+.vs/
+.vscode/
+Engine/x64/
+Tests/x64/
+x64/
