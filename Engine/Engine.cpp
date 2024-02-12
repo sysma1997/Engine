@@ -28,7 +28,7 @@ Engine::Engine(std::string title, int width, int height) :
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 	
 	//glewExperimental = true;
-	if (glfwInit() != GL_TRUE) {
+	if (glewInit() != GLEW_OK) {
 		std::cout << LOG << log << "Error to init GLEW.\n";
 		return;
 	}
@@ -49,7 +49,7 @@ void Engine::newFrame()
 {
 	glfwGetFramebufferSize(window, &width, &height);
 	glViewport(0, 0, width, height);
-	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+	//glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 void Engine::renderFrame()

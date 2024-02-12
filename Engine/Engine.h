@@ -8,13 +8,14 @@
 class Engine
 {
 private:
-	const std::string LOG{ "ENGINE::" };
+	std::string LOG{ "SYSMA::ENGINE::ENGINE::" };
 
-	GLFWwindow* window;
 	std::string title;
+public:
+	GLFWwindow* window;
 	int width;
 	int height;
-public:
+
 	Engine(std::string title, int width = 800, int height = 600);
 	~Engine();
 

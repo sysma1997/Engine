@@ -93,16 +93,19 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)..\Engine\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;glm.lib;assimp-vc143-mt.lib;assimp-vc143-mtd.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;glm.lib;assimp-vc143-mt.lib;assimp-vc143-mtd.lib;freetype.lib;Engine.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)Assets" "$(OutDir)Assets" /y /d /e /h /c /i
-xcopy "$(ProjectDir)Shaders" "$(OutDir)Shaders" /y /d /e /h /c /i</Command>
+
+xcopy "$(ProjectDir)Shaders" "$(OutDir)Shaders" /y /d /e /h /c /i
+xcopy "$(ProjectDir)..\Engine\Shaders" "$(ProjectDir)Shaders" /y /d /e /h /c /i</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)*.dll" "$(OutDir)" /y /d</Command>
@@ -117,18 +120,21 @@ xcopy "$(ProjectDir)Shaders" "$(OutDir)Shaders" /y /d /e /h /c /i</Command>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)..\Engine\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;glm.lib;assimp-vc143-mt.lib;assimp-vc143-mtd.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;glm.lib;assimp-vc143-mt.lib;assimp-vc143-mtd.lib;freetype.lib;Engine.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)Assets" "$(OutDir)Assets" /y /d /e /h /c /i
-xcopy "$(ProjectDir)Shaders" "$(OutDir)Shaders" /y /d /e /h /c /i</Command>
+
+xcopy "$(ProjectDir)Shaders" "$(OutDir)Shaders" /y /d /e /h /c /i
+xcopy "$(ProjectDir)..\Engine\Shaders" "$(ProjectDir)Shaders" /y /d /e /h /c /i</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)*.dll" "$(OutDir)" /y /d</Command>
@@ -141,16 +147,19 @@ xcopy "$(ProjectDir)Shaders" "$(OutDir)Shaders" /y /d /e /h /c /i</Command>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)..\Engine\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;glm.lib;assimp-vc143-mt.lib;assimp-vc143-mtd.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;glm.lib;assimp-vc143-mt.lib;assimp-vc143-mtd.lib;freetype.lib;Engine.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)Assets" "$(OutDir)Assets" /y /d /e /h /c /i
-xcopy "$(ProjectDir)Shaders" "$(OutDir)Shaders" /y /d /e /h /c /i</Command>
+
+xcopy "$(ProjectDir)Shaders" "$(OutDir)Shaders" /y /d /e /h /c /i
+xcopy "$(ProjectDir)..\Engine\Shaders" "$(ProjectDir)Shaders" /y /d /e /h /c /i</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)*.dll" "$(OutDir)" /y /d</Command>
@@ -165,18 +174,21 @@ xcopy "$(ProjectDir)Shaders" "$(OutDir)Shaders" /y /d /e /h /c /i</Command>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)..\Engine\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;glm.lib;assimp-vc143-mt.lib;assimp-vc143-mtd.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;glm.lib;assimp-vc143-mt.lib;assimp-vc143-mtd.lib;freetype.lib;Engine.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)Assets" "$(OutDir)Assets" /y /d /e /h /c /i
-xcopy "$(ProjectDir)Shaders" "$(OutDir)Shaders" /y /d /e /h /c /i</Command>
+
+xcopy "$(ProjectDir)Shaders" "$(OutDir)Shaders" /y /d /e /h /c /i
+xcopy "$(ProjectDir)..\Engine\Shaders" "$(ProjectDir)Shaders" /y /d /e /h /c /i</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)*.dll" "$(OutDir)" /y /d</Command>
