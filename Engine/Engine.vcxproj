@@ -71,20 +71,20 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir)..\Libraries\include\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)..\Libraries\libs\;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)..\Libraries\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)..\Libraries\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(ProjectDir)..\Libraries\include\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)..\Libraries\libs\;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)..\Libraries\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)..\Libraries\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(ProjectDir)..\Libraries\include\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)..\Libraries\libs\;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)..\Libraries\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)..\Libraries\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(ProjectDir)..\Libraries\include\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)..\Libraries\libs\;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)..\Libraries\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)..\Libraries\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -164,9 +164,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h" />
-    <ClInclude Include="ResourceManager.h" />
-    <ClInclude Include="Texture.h" />
-    <ClInclude Include="UI\Label.h" />
     <ClInclude Include="Libs\imgui\imconfig.h" />
     <ClInclude Include="Libs\imgui\imgui.h" />
     <ClInclude Include="Libs\imgui\imgui_impl_glfw.h" />
@@ -177,13 +174,12 @@
     <ClInclude Include="Libs\imgui\imstb_textedit.h" />
     <ClInclude Include="Libs\imgui\imstb_truetype.h" />
     <ClInclude Include="Libs\stb_image.h" />
+    <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="Texture.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp" />
-    <ClCompile Include="ResourceManager.cpp" />
-    <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="UI\Label.cpp" />
     <ClCompile Include="Libs\imgui\imgui.cpp" />
     <ClCompile Include="Libs\imgui\imgui_demo.cpp" />
     <ClCompile Include="Libs\imgui\imgui_draw.cpp" />
@@ -191,7 +187,9 @@
     <ClCompile Include="Libs\imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="Libs\imgui\imgui_tables.cpp" />
     <ClCompile Include="Libs\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\UI\Label.frag" />

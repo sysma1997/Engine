@@ -71,20 +71,20 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir)..\Libraries\include\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)..\Libraries\libs\;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)..\Libraries\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)..\Libraries\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(ProjectDir)..\Libraries\include\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)..\Libraries\libs\;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)..\Libraries\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)..\Libraries\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(ProjectDir)..\Libraries\include\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)..\Libraries\libs\;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)..\Libraries\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)..\Libraries\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(ProjectDir)..\Libraries\include\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)..\Libraries\libs\;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)..\Libraries\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)..\Libraries\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -92,7 +92,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\Engine\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\Engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -119,7 +119,7 @@ xcopy "$(ProjectDir)..\Engine\Shaders" "$(ProjectDir)Shaders" /y /d /e /h /c /i<
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\Engine\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\Engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -146,7 +146,7 @@ xcopy "$(ProjectDir)..\Engine\Shaders" "$(ProjectDir)Shaders" /y /d /e /h /c /i<
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\Engine\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\Engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -173,7 +173,7 @@ xcopy "$(ProjectDir)..\Engine\Shaders" "$(ProjectDir)Shaders" /y /d /e /h /c /i<
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\Engine\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\Engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -196,6 +196,10 @@ xcopy "$(ProjectDir)..\Engine\Shaders" "$(ProjectDir)Shaders" /y /d /e /h /c /i<
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\Test.frag" />
+    <None Include="Shaders\Test.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

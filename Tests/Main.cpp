@@ -1,58 +1,57 @@
-#include <iostream>
-#include <string>
-#include <filesystem>
-
 #include <Engine.h>
-#include <UI/Label.h>
-
-#include <Libs/imgui/imgui.h>
-#include <Libs/imgui/imgui_impl_glfw.h>
-#include <Libs/imgui/imgui_impl_opengl3.h>
+#include <Shader.h>
 
 int main() {
-	Engine* engine{ new Engine{"Tests"} };
-	UI::Label* label{ new UI::Label{static_cast<unsigned int>(engine->width), static_cast<unsigned int>(engine->height)} };
-	label->load("Assets/Fonts/OCRAEXT.TTF", 24);
-
-	IMGUI_CHECKVERSION();
-	ImGui::CreateContext();
-	ImGui::StyleColorsDark();
-	ImGui_ImplGlfw_InitForOpenGL(engine->window, true);
-	ImGui_ImplOpenGL3_Init();
-
+	Engine* engine{ new Engine{"Test"} };
 	engine->setKeyCallback([](GLFWwindow* window, int key, int scancode, int action, int mods) {
 		if (key == GLFW_KEY_ESCAPE && GLFW_PRESS) {
 			glfwSetWindowShouldClose(window, true);
 		}
 	});
 
-	float color[3]{ 1.0f, 1.0f, 1.0f };
-	while (engine->isLoop()) {
-		engine->newFrame();
+    float vertices[] = {
+        0.5f, -0.5f, 0.0f,  // right down
+        -0.5f, -0.5f, 0.0f, // left down
+        0.0f, 0.5f, 0.0f,   // up
+    };
 
-		ImGui_ImplOpenGL3_NewFrame();
-		ImGui_ImplGlfw_NewFrame();
-		ImGui::NewFrame();
+    Shader* shader{ new Shader{"Shaders/triangle/triangle.vert", "Shaders/triangle/triangle.frag"} };
 
-		label->render("Sebastian Moreno Acero", 5.0f, 100.0f, 1.0f, glm::vec3{ color[0], color[1], color[2] });
+    GLuint VAO, VBO;
+    glGenVertexArrays(1, &VAO);
+    glGenBuffers(1, &VBO);
 
-		ImGui::Begin("Change color triangle", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
+    glBindVertexArray(VAO);
 
-		ImGui::Text("Color");
-		ImGui::ColorEdit3("##color", color);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-		ImGui::End();
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
 
-		ImGui::Render();
-		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
 
-		engine->renderFrame();
+    float color[] = {
+        1.0f, 1.0f, 1.0f, // RGB
+    };
+
+    while (engine->isLoop()) {
+        engine->newFrame();
+
+        shader->use();
+        shader->setVec3("color", glm::vec3{ 1.0f });
+
+        glBindVertexArray(VAO);
+        glDrawArrays(GL_TRIANGLES, 0, 3);
+
+        engine->renderFrame();
 	}
 
-	ImGui_ImplOpenGL3_Shutdown();
-	ImGui_ImplGlfw_Shutdown();
-	ImGui::DestroyContext();
+    glDeleteVertexArrays(1, &VAO);
+    glDeleteBuffers(1, &VBO);
+    glDeleteProgram(shader->id);
 
-	engine->terminate();
+    glfwTerminate();
 	return 0;
 }

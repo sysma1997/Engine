@@ -1,28 +1,25 @@
 #pragma once
 
 #include <iostream>
-#include <string>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-class Engine
-{
-private:
-	std::string LOG{ "SYSMA::ENGINE::ENGINE::" };
-
-	std::string title;
+class Engine {
 public:
-	GLFWwindow* window;
-	int width;
-	int height;
+    int width;
+    int height;
+    GLFWwindow* window;
 
-	Engine(std::string title, int width = 800, int height = 600);
-	~Engine();
+    Engine(const char* title, int width = 800, int height = 600, bool is2D = true);
+    ~Engine();
 
-	bool isLoop();
-	void newFrame();
-	void renderFrame();
-	void terminate();
+    float fWidth();
+    float fHeight();
 
-	void setKeyCallback(GLFWkeyfun callback);
+    bool isLoop();
+    void newFrame();
+    void renderFrame();
+    void terminate();
+
+    void setKeyCallback(GLFWkeyfun callback);
 };
