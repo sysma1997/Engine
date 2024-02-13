@@ -6,6 +6,9 @@
 
 class Engine {
 public:
+    static bool Keys[1024];
+    static bool KeyProcessed[1024];
+
     int width;
     int height;
     GLFWwindow* window;

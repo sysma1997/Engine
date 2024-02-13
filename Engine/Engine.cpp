@@ -1,5 +1,8 @@
 #include "Engine.h"
 
+bool Engine::Keys[1024];
+bool Engine::KeyProcessed[1024];
+
 Engine::Engine(const char* title, int width, int height, bool is2D) : 
     width{ width }, height{ height } {
     if (!glfwInit()) {

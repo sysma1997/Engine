@@ -1,57 +1,79 @@
 #include <Engine.h>
-#include <Shader.h>
+#include <2D/Sprite.h>
+#include <UI/Test.h>
+
+void playerProcessInput(float deltaTime, E2D::Sprite& player) {
+	if (Engine::Keys[GLFW_KEY_LEFT])
+		player.position.x -= player.velocity.x * deltaTime;
+	if (Engine::Keys[GLFW_KEY_RIGHT])
+		player.position.x += player.velocity.x * deltaTime;
+	if (Engine::Keys[GLFW_KEY_UP])
+		player.position.y -= player.velocity.y * deltaTime;
+	if (Engine::Keys[GLFW_KEY_DOWN])
+		player.position.y += player.velocity.y * deltaTime;
+}
 
 int main() {
 	Engine* engine{ new Engine{"Test"} };
+	EUI::Test* ui{ new EUI::Test{engine->window} };
+
 	engine->setKeyCallback([](GLFWwindow* window, int key, int scancode, int action, int mods) {
 		if (key == GLFW_KEY_ESCAPE && GLFW_PRESS) {
 			glfwSetWindowShouldClose(window, true);
 		}
+		
+		if (key >= 0 && key <= 1024) {
+			if (action == GLFW_PRESS) Engine::Keys[key] = true;
+			if (action == GLFW_RELEASE) {
+				Engine::Keys[key] = false;
+				Engine::KeyProcessed[key] = false;
+			}
+		}
 	});
 
-    float vertices[] = {
-        0.5f, -0.5f, 0.0f,  // right down
-        -0.5f, -0.5f, 0.0f, // left down
-        0.0f, 0.5f, 0.0f,   // up
-    };
+	Shader shader{ "Shaders/Test.vert", "Shaders/Test.frag" };
+	Texture texture{ "Assets/Images/awesomeface.png", true };
 
-    Shader* shader{ new Shader{"Shaders/triangle/triangle.vert", "Shaders/triangle/triangle.frag"} };
+	glm::mat4 projection{ glm::ortho(0.0f, engine->fWidth(), engine->fHeight(), 0.0f) };
+	shader.setMat4("projection", projection, true);
 
-    GLuint VAO, VBO;
-    glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, &VBO);
+	E2D::Sprite* player{ new E2D::Sprite{shader, texture} };
+	player->position = glm::vec2{ engine->fWidth() / 2.0f, engine->fHeight() / 2.0f };
+	player->size = glm::vec2{ 60.0f };
 
-    glBindVertexArray(VAO);
-
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
-
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindVertexArray(0);
-
-    float color[] = {
-        1.0f, 1.0f, 1.0f, // RGB
-    };
-
+	float deltaTime{ 0.0f };
+	float lastFrame{ 0.0f };
     while (engine->isLoop()) {
+		float currentFrame = glfwGetTime();
+		deltaTime = currentFrame - lastFrame;
+		lastFrame = currentFrame;
+
         engine->newFrame();
 
-        shader->use();
-        shader->setVec3("color", glm::vec3{ 1.0f });
+		playerProcessInput(deltaTime, *player);
+		player->draw();
 
-        glBindVertexArray(VAO);
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+		ui->newFrame();
+		ImGui::Begin("Player");
+		ImGui::Text("Position");
+		ImGui::InputFloat("##playerPositionX", &player->position.x);
+		ImGui::SameLine();
+		ImGui::InputFloat("##playerPositionY", &player->position.y);
+		ImGui::Text("Size");
+		ImGui::InputFloat("##playerSizeX", &player->size.x);
+		ImGui::SameLine();
+		ImGui::InputFloat("##playerSizeY", &player->size.y);
+		ImGui::Text("Velocity");
+		ImGui::InputFloat("##playerVelocityX", &player->velocity.x);
+		ImGui::SameLine();
+		ImGui::InputFloat("##playerVelocityY", &player->velocity.y);
+		ImGui::End();
+		ui->renderFrame();
 
         engine->renderFrame();
 	}
 
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
-    glDeleteProgram(shader->id);
-
-    glfwTerminate();
+	ui->terminate();
+	engine->terminate();
 	return 0;
 }
