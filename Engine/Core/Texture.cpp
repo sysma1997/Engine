@@ -1,7 +1,7 @@
-#include "Texture.h"
+#include "../Include/Texture.h"
 
 #define STB_IMAGE_IMPLEMENTATION
-#include "Libs/stb_image.h"
+#include "../Libs/stb_image.h"
 
 Texture::Texture() {
     glGenTextures(1, &id);

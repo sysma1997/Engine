@@ -1,11 +1,9 @@
-#include "Sprite.h"
+#include "../../Include/2D/Sprite.h"
 
 namespace E2D {
-	Sprite::Sprite(Shader& shader, Texture& texture) : 
-		shader{ shader }, texture{ texture }, 
-		position{ 1.0f }, size{ 10.0f }, velocity{ 60.0f }, 
-		rotate{ 0.0f }, 
-		color{ 1.0f } {
+	Sprite::Sprite(Texture& texture, float width, float height) : 
+		Object{ *(new Shader{"Shaders/2D/Sprite.vert", "Shaders/2D/Sprite.frag"}), width, height, false},
+		texture{ texture } {
 		float vertices[]{
 			// pos      // tex
 			0.0f, 1.0f, 0.0f, 1.0f,
@@ -16,7 +14,7 @@ namespace E2D {
 			1.0f, 1.0f, 1.0f, 1.0f,
 			1.0f, 0.0f, 1.0f, 0.0f
 		};
-		
+
 		GLuint VBO;
 		glGenVertexArrays(1, &VAO);
 		glGenBuffers(1, &VBO);
@@ -29,9 +27,9 @@ namespace E2D {
 		glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(float) * 4, (void*)0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
-	}
-	Sprite::~Sprite() {
-		glDeleteVertexArrays(1, &VAO);
+
+		glm::mat4 projection{ glm::ortho(0.0f, width, height, 0.0f) };
+		shader.setMat4("projection", projection, true);
 	}
 
 	void Sprite::draw() {

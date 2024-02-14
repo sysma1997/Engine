@@ -1,4 +1,4 @@
-#include "ResourceManager.h"
+#include "../Include/ResourceManager.h"
 
 std::map<std::string, Shader> ResourceManager::shaders;
 std::map<std::string, Texture> ResourceManager::textures;
