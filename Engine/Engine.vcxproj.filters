@@ -48,9 +48,6 @@
     <ClInclude Include="Include\Engine.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Include\ResourceManager.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="Include\Shader.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
@@ -67,6 +64,9 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="Include\2D\Object.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\UI\Label.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
@@ -95,9 +95,6 @@
     <ClCompile Include="Core\Engine.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Core\ResourceManager.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="Core\Shader.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
@@ -116,11 +113,16 @@
     <ClCompile Include="Core\2D\Rectangle.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="Core\UI\Label.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\2D\Rectangle.vert" />
     <None Include="Shaders\2D\Rectangle.frag" />
     <None Include="Shaders\2D\Sprite.frag" />
     <None Include="Shaders\2D\Sprite.vert" />
+    <None Include="Shaders\UI\Label.frag" />
+    <None Include="Shaders\UI\Label.vert" />
   </ItemGroup>
 </Project>

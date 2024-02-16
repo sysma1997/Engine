@@ -166,6 +166,7 @@
     <ClInclude Include="Include\2D\Object.h" />
     <ClInclude Include="Include\2D\Rectangle.h" />
     <ClInclude Include="Include\Engine.h" />
+    <ClInclude Include="Include\UI\Label.h" />
     <ClInclude Include="Include\UI\Test.h" />
     <ClInclude Include="Libs\imgui\imconfig.h" />
     <ClInclude Include="Libs\imgui\imgui.h" />
@@ -177,7 +178,6 @@
     <ClInclude Include="Libs\imgui\imstb_textedit.h" />
     <ClInclude Include="Libs\imgui\imstb_truetype.h" />
     <ClInclude Include="Libs\stb_image.h" />
-    <ClInclude Include="Include\ResourceManager.h" />
     <ClInclude Include="Include\Shader.h" />
     <ClInclude Include="Include\2D\Sprite.h" />
     <ClInclude Include="Include\Texture.h" />
@@ -186,6 +186,7 @@
     <ClCompile Include="Core\2D\Object.cpp" />
     <ClCompile Include="Core\2D\Rectangle.cpp" />
     <ClCompile Include="Core\Engine.cpp" />
+    <ClCompile Include="Core\UI\Label.cpp" />
     <ClCompile Include="Core\UI\Test.cpp" />
     <ClCompile Include="Libs\imgui\imgui.cpp" />
     <ClCompile Include="Libs\imgui\imgui_demo.cpp" />
@@ -194,7 +195,6 @@
     <ClCompile Include="Libs\imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="Libs\imgui\imgui_tables.cpp" />
     <ClCompile Include="Libs\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="Core\ResourceManager.cpp" />
     <ClCompile Include="Core\Shader.cpp" />
     <ClCompile Include="Core\2D\Sprite.cpp" />
     <ClCompile Include="Core\Texture.cpp" />
@@ -204,6 +204,8 @@
     <None Include="Shaders\2D\Rectangle.vert" />
     <None Include="Shaders\2D\Sprite.frag" />
     <None Include="Shaders\2D\Sprite.vert" />
+    <None Include="Shaders\UI\Label.frag" />
+    <None Include="Shaders\UI\Label.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

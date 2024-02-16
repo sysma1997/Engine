@@ -1,8 +1,8 @@
 #include "Player.h"
 
-const float PLAYER_VELOCITY = 250.0f;
+const float PLAYER_VELOCITY{ 250.0f };
 
-void playerProcessInput(E2D::Rectangle& player, float width, float height) {
+void playerProcessInput(E2D::Rectangle& player, float height) {
 	if (Engine::Keys[GLFW_KEY_UP] || Engine::Keys[GLFW_KEY_DOWN]) {
 		if (Engine::Keys[GLFW_KEY_UP])
 			player.position.y -= PLAYER_VELOCITY * Engine::DeltaTime;

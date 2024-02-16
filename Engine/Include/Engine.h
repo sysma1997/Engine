@@ -18,13 +18,14 @@ public:
     int lastWidth, lastHeight;
     GLFWwindow* window;
 
-    Engine(const char* title, int width = 800, int height = 600, bool is2D = true);
+    Engine(const char* title, int width = 800, int height = 600);
     ~Engine();
 
     float fWidth();
     float fHeight();
 
     bool isLoop();
+    void closeLoop();
     void newFrame(std::function<void()> updateWindowSize);
     void renderFrame();
     void terminate();

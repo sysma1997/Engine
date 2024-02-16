@@ -4,7 +4,7 @@ bool Engine::Keys[1024];
 bool Engine::KeyProcessed[1024];
 float Engine::DeltaTime{ 0.0f };
 
-Engine::Engine(const char* title, int width, int height, bool is2D) : 
+Engine::Engine(const char* title, int width, int height) : 
     width{ width }, height{ height }, 
     lastFrame{ 0.0f } {
     if (!glfwInit()) {
@@ -37,12 +37,11 @@ Engine::Engine(const char* title, int width, int height, bool is2D) :
         return;
     }
 
-    if (!is2D) glEnable(GL_DEPTH_TEST);
-    else
-    {
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    }
+    // for 2D
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    // for 3D
+    //glEnable(GL_DEPTH_TEST);
 
     setKeyCallback([](GLFWwindow* window, int key, int scancode, int action, int mods) {
         if (key >= 0 && key <= 1024) {
@@ -66,6 +65,9 @@ float Engine::fHeight() {
 bool Engine::isLoop() {
     return glfwWindowShouldClose(window) == 0;
 }
+void Engine::closeLoop() {
+    glfwSetWindowShouldClose(window, true);
+}
 void Engine::newFrame(std::function<void()> updateWindowSize) {
     float currentFrame = glfwGetTime();
     DeltaTime = currentFrame - lastFrame;
@@ -73,7 +75,7 @@ void Engine::newFrame(std::function<void()> updateWindowSize) {
 
     glfwGetFramebufferSize(window, &width, &height);
     glViewport(0, 0, width, height);
-    /* glClearColor(0.2f, 0.3f, 0.3f, 1.0f); */
+    //glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     if (width != lastWidth ||

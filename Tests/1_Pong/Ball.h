@@ -6,8 +6,11 @@
 #include <time.h>
 #include <Engine.h>
 #include <2D/Sprite.h>
+#include <2D/Rectangle.h>
 
 class Ball {
+private:
+	bool checkCollision(E2D::Rectangle& pallet);
 public:
 	E2D::Sprite sprite;
 	glm::vec2 direction;
@@ -15,6 +18,7 @@ public:
 
 	Ball(E2D::Sprite& sprite);
 
-	void processInput(bool& isPlaying);
-	void update(float width, float height);
+	void update(float height, E2D::Rectangle& player, E2D::Rectangle& opponent);
+	void initRandomDirection();
+	bool outScreen(float width, int& pointsPlayer, int& pointsOpponent);
 };
