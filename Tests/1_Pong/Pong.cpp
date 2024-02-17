@@ -51,14 +51,20 @@ void pong() {
 			ball->sprite.updateWindowSize(width, height);
 
 			resetPosition();
-			});
+		});
 
-		if (state == PongState::MENU) {
+		if (state == PongState::MENU || 
+			state == PongState::RESULTS) {
 			if (Engine::Keys[GLFW_KEY_SPACE] && !Engine::KeyProcessed[GLFW_KEY_SPACE]) {
 				Engine::KeyProcessed[GLFW_KEY_SPACE] = true;
-				state = PongState::GAME;
-				
 				ball->initRandomDirection();
+				if (state == PongState::RESULTS) {
+					resetPosition();
+					pointsPlayer = 0;
+					pointsOpponent = 0;
+				}
+				
+				state = PongState::GAME;
 			}
 			if (Engine::Keys[GLFW_KEY_ESCAPE] && !Engine::KeyProcessed[GLFW_KEY_ESCAPE]) {
 				Engine::KeyProcessed[GLFW_KEY_ESCAPE] = true;
@@ -81,6 +87,9 @@ void pong() {
 					ball->initRandomDirection();
 				}
 				iaOpponent(*opponent, ball->sprite, engine->fHeight());
+
+				if (pointsPlayer > 4 || pointsOpponent > 4)
+					state = PongState::RESULTS;
 			}
 		}
 
@@ -94,17 +103,68 @@ void pong() {
 		float posOpponentX{ (engine->fWidth() / 2.0f) + 80.0f };
 		label->render(std::to_string(pointsOpponent), glm::vec2{ posOpponentX, 5.0f });
 
-		if (state == PongState::MENU) {
-			label->render("Press SPACE to init game", glm::vec2{ 200.0f, engine->fHeight() / 2.0f }, 0.5f);
-			label->render("Press ESCAPE to exit",
-				glm::vec2{ 250.0f, (engine->fHeight() / 2.0f + 20.0f) }, 0.4f,
-				glm::vec3{ 1.0f, 0.0f, 0.0f });
+		if (state == PongState::MENU || 
+			state == PongState::RESULTS) {
+			if (state == PongState::RESULTS) {
+				std::string message{ (pointsPlayer > pointsOpponent) ? "YOU WIN!" : "YOU LOSE!" };
+				glm::vec2 sizeMessage{ label->getSizeText(message) };
+				glm::vec2 positionMessage{
+					(engine->fWidth() / 2.0f) - (sizeMessage.x / 2.0f),
+					(engine->fHeight() / 2.0f) - (sizeMessage.y / 2.0f)
+				};
+				glm::vec3 color{ (pointsPlayer > pointsOpponent) ? glm::vec3{ 0.0f, 0.8f, 0.0f } : glm::vec3{ 0.8f, 0.0f, 0.0f } };
+				label->render(message, positionMessage, 1.0f, color);
+			}
+
+			std::string message{ (state != PongState::RESULTS) ? "Press SPACE to init game" : "Press SPACE to reset game" };
+			float scale{ 0.5f };
+			glm::vec2 sizeMessage{ label->getSizeText(message, scale) };
+			glm::vec2 positionMessage{ 
+				(engine->fWidth() / 2.0f) - (sizeMessage.x / 2.0f), 
+				(engine->fHeight() / 2.0f) - (sizeMessage.y / 2.0f) + 100.0f
+			};
+			glm::vec3 color{ 0.64f };
+			label->render(message, positionMessage, scale, color);
+
+			message = "Press ESC to exit";
+			scale = 0.4f;
+			float sizeLastMessage{ sizeMessage.y };
+			sizeMessage = label->getSizeText(message, scale);
+			positionMessage = glm::vec2{
+				(engine->fWidth() / 2.0f) - (sizeMessage.x / 2.0f),
+				(engine->fHeight() / 2.0f) - (sizeMessage.y / 2.0f) + 100.0f + (sizeLastMessage + 5.0f)
+			};
+			label->render(message, positionMessage, scale, glm::vec3{ 0.8f, 0.0f, 0.0f });
+		}
+		if (state == PongState::PAUSE) {
+			std::string message{ "PAUSE" };
+			float scale{ 0.5f };
+			glm::vec2 sizeMessage{ label->getSizeText(message, scale) };
+			glm::vec2 positionMessage{
+				(engine->fWidth() / 2.0f) - (sizeMessage.x / 2.0f),
+				(engine->fHeight() / 2.0f) - (sizeMessage.y / 2.0f)
+			};
+			glm::vec3 color{ 0.64f };
+			label->render(message, positionMessage, scale, color);
+
+			message = "Press ESC to continue";
+			scale = 0.4f;
+			float sizeLastMessage{ sizeMessage.y };
+			sizeMessage = label->getSizeText(message, scale);
+			positionMessage = glm::vec2{
+				(engine->fWidth() / 2.0f) - (sizeMessage.x / 2.0f),
+				(engine->fHeight() / 2.0f) - (sizeMessage.y / 2.0f) + (sizeLastMessage + 5.0f)
+			};
+			label->render(message, positionMessage, scale, color);
 		}
 
 		//imgui->newFrame();
-		//ImGui::Begin("Pos");
+		//ImGui::Begin("Pos texto menu");
 		//ImGui::Text("pos player x");
-		//ImGui::InputFloat("##posPlayerX", &posPlayerX);
+		//ImGui::ColorEdit3("##label", colors);
+		//if (ImGui::Button("click")) {
+		//	std::cout << "Color: r = " << colors[0] << ", g = " << colors[1] << ", b = " << colors[2] << '\n';
+		//}
 		//ImGui::End();
 		//imgui->renderFrame();
 		engine->renderFrame();

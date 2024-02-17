@@ -81,14 +81,14 @@ namespace EUI {
         std::string::const_iterator c;
         for (c = text.begin(); c != text.end(); c++)
         {
-            Character ch = characters[*c];
+            Character ch{ characters[*c] };
 
-            float xpos = position.x + ch.bearing.x * scale;
-            float ypos = position.y + (this->characters['H'].bearing.y - ch.bearing.y) * scale;
+            float xpos{ position.x + ch.bearing.x * scale };
+            float ypos{ position.y + (characters['H'].bearing.y - ch.bearing.y) * scale };
 
-            float w = ch.size.x * scale;
-            float h = ch.size.y * scale;
-            float vertices[6][4] = {
+            float w{ ch.size.x * scale };
+            float h{ ch.size.y * scale };
+            float vertices[6][4]{
                 { xpos,     ypos + h,   0.0f, 1.0f },
                 { xpos + w, ypos,       1.0f, 0.0f },
                 { xpos,     ypos,       0.0f, 0.0f },
@@ -108,5 +108,22 @@ namespace EUI {
         }
         glBindVertexArray(0);
         glBindTexture(GL_TEXTURE_2D, 0);
+    }
+    glm::vec2 Label::getSizeText(std::string text, float scale) {
+        glm::vec2 size{ 0.0f };
+
+        std::string::const_iterator c;
+        for (c = text.begin(); c != text.end(); c++) {
+            Character ch{ characters[*c] };
+
+            float width{ (ch.advance >> 6) * scale };
+            float height{ (ch.size.y * scale) + ((characters['H'].bearing.y - ch.bearing.y) * scale) };
+            
+            size.x += width;
+            if (height > size.y)
+                size.y = height;
+        }
+
+        return size;
     }
 }
