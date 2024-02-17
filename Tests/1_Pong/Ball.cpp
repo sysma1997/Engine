@@ -1,6 +1,7 @@
 #include "Ball.h"
 
-Ball::Ball(E2D::Sprite& sprite) : sprite{ sprite }, direction{ 0.0f }, velocity{ 200.0f } {}
+Ball::Ball(E2D::Sprite& sprite) : sprite{ sprite }, direction{ 0.0f }, velocity{ 200.0f }, 
+	isTimeForNextCollision{ false }, timeForNextCollision{ 0.0f } {}
 
 bool Ball::checkCollision(E2D::Rectangle& pallet) {
 	bool collisionX{
@@ -16,6 +17,11 @@ bool Ball::checkCollision(E2D::Rectangle& pallet) {
 }
 
 void Ball::update(float height, E2D::Rectangle& player, E2D::Rectangle& opponent) {
+	if (isTimeForNextCollision) {
+		if (timeForNextCollision > 0.5f) isTimeForNextCollision = false;
+		timeForNextCollision += Engine::DeltaTime;
+	}
+
 	sprite.position += direction * velocity * Engine::DeltaTime;
 
 	float minY{ sprite.size.y / 2.0f };
@@ -23,7 +29,9 @@ void Ball::update(float height, E2D::Rectangle& player, E2D::Rectangle& opponent
 	if (sprite.position.y <= minY || sprite.position.y >= maxY)
 		direction.y = -direction.y;
 	
-	if (checkCollision(player) || checkCollision(opponent)) {
+	if (!isTimeForNextCollision && (checkCollision(player) || checkCollision(opponent))) {
+		isTimeForNextCollision = true;
+
 		direction.x = -direction.x;
 		velocity += 50.0f;
 	}

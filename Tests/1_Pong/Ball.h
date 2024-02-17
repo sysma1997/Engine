@@ -10,6 +10,9 @@
 
 class Ball {
 private:
+	bool isTimeForNextCollision;
+	float timeForNextCollision;
+	
 	bool checkCollision(E2D::Rectangle& pallet);
 public:
 	E2D::Sprite sprite;
