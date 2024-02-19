@@ -1,18 +1,25 @@
 #pragma once
 
+#include <iostream>
 #include <string>
+#include <map>
 #include <SoLoud/soloud.h>
 #include <SoLoud/soloud_wav.h>
 
 class Audio {
 private:
-	static SoLoud::Soloud Soloud;
-	static SoLoud::Wav Sample;
-	static SoLoud::handle Handle;
+	std::string LOG{ "SYSMA::ENGINE::AUDIO::" };
+
+	SoLoud::Soloud soloud;
+	SoLoud::Wav sample;
+	SoLoud::handle handle;
 
 public:
-	static void Load(std::string path);
-	static void Play();
-	static void Pause();
-	static void Stop();
+	Audio();
+	~Audio();
+
+	void load(std::string path);
+	void play();
+	//void pause();
+	//void stop();
 };

@@ -1,18 +1,21 @@
 #include "../Include/Audio.h"
 
-SoLoud::Soloud Audio::Soloud;
-SoLoud::Wav Audio::Sample;
-SoLoud::handle Audio::Handle;
+Audio::Audio() {
+	soloud.init();
+}
+Audio::~Audio() {
+	soloud.deinit();
+}
 
-void Audio::Load(std::string path) {
-	Sample.load(path.c_str());
+void Audio::load(std::string path) {
+	sample.load(path.c_str());
 }
-void Audio::Play() {
-	Handle = Soloud.play(Sample);
+void Audio::play() {
+	handle = soloud.play(sample);
 }
-void Audio::Pause() {
-	Soloud.setPause(Handle, true);
-}
-void Audio::Stop() {
-	Soloud.stop(Handle);
-}
+//void Audio::pause() {
+//	soloud.setPause(handle, true);
+//}
+//void Audio::stop() {
+//	soloud.stop(handle);
+//}

@@ -11,6 +11,8 @@
 
 class Ball {
 private:
+	Audio audio;
+
 	bool isTimeForNextCollision;
 	float timeForNextCollision;
 	

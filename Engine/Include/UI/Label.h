@@ -27,6 +27,7 @@ namespace EUI {
         
         Label(std::string font, int fontSize, float width, float height);
         
+        void updateWindowSize(float width, float height);
         void loadFont(std::string font, int fontSize);
         void render(std::string text, glm::vec2 position, 
             float scale = 1.0f, glm::vec3 color = glm::vec3{1.0f});

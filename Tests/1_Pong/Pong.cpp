@@ -35,7 +35,7 @@ void pong() {
 
 		ball->sprite.position = centerPosition;
 		ball->sprite.size = glm::vec2{ engine->fWidth() * 0.05f, engine->fWidth() * 0.05f };
-		};
+	};
 	resetPosition();
 
 	int pointsPlayer{ 0 }, pointsOpponent{ 0 };
@@ -49,6 +49,7 @@ void pong() {
 			player->updateWindowSize(width, height);
 			opponent->updateWindowSize(width, height);
 			ball->sprite.updateWindowSize(width, height);
+			label->updateWindowSize(width, height);
 
 			resetPosition();
 		});
@@ -76,6 +77,11 @@ void pong() {
 			if (Engine::Keys[GLFW_KEY_ESCAPE] && !Engine::KeyProcessed[GLFW_KEY_ESCAPE]) {
 				Engine::KeyProcessed[GLFW_KEY_ESCAPE] = true;
 				state = (state == PongState::GAME) ? PongState::PAUSE : PongState::GAME;
+			}
+			if (state == PongState::PAUSE && 
+				(Engine::Keys[GLFW_KEY_Q] && !Engine::KeyProcessed[GLFW_KEY_Q])) {
+				Engine::KeyProcessed[GLFW_KEY_Q] = true;
+				engine->closeLoop();
 			}
 
 			if (state == PongState::GAME) {
@@ -149,11 +155,18 @@ void pong() {
 
 			message = "Press ESC to continue";
 			scale = 0.4f;
-			float sizeLastMessage{ sizeMessage.y };
 			sizeMessage = label->getSizeText(message, scale);
 			positionMessage = glm::vec2{
 				(engine->fWidth() / 2.0f) - (sizeMessage.x / 2.0f),
-				(engine->fHeight() / 2.0f) - (sizeMessage.y / 2.0f) + (sizeLastMessage + 5.0f)
+				positionMessage.y + sizeMessage.y + 15.0f
+			};
+			label->render(message, positionMessage, scale, color);
+
+			message = "Press Q to exit";
+			sizeMessage = label->getSizeText(message, scale);
+			positionMessage = glm::vec2{
+				(engine->fWidth() / 2.0f) - (sizeMessage.x / 2.0f),
+				positionMessage.y + sizeMessage.y + 5.0f
 			};
 			label->render(message, positionMessage, scale, color);
 		}

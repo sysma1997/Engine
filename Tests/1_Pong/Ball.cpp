@@ -1,9 +1,8 @@
 #include "Ball.h"
 
-Ball::Ball(E2D::Sprite& sprite) : sprite{ sprite }, direction{ 0.0f }, velocity{ 200.0f }, 
-	isTimeForNextCollision{ false }, timeForNextCollision{ 0.0f } {
-	Audio::Load("1_Pong/Assets/Sounds/ballCollision.wav");
-}
+Ball::Ball(E2D::Sprite& sprite) : audio{ },
+	sprite{ sprite }, direction{ 0.0f }, velocity{ 200.0f }, 
+	isTimeForNextCollision{ false }, timeForNextCollision{ 0.0f } {}
 
 bool Ball::checkCollision(E2D::Rectangle& pallet) {
 	bool collisionX{
@@ -37,7 +36,8 @@ void Ball::update(float height, E2D::Rectangle& player, E2D::Rectangle& opponent
 		direction.x = -direction.x;
 		velocity += 50.0f;
 
-		Audio::Play();
+		audio.load("1_Pong/Assets/Sounds/ballCollision.wav");
+		audio.play();
 	}
 }
 void Ball::initRandomDirection() {
@@ -49,15 +49,15 @@ bool Ball::outScreen(float width, int& pointsPlayer, int& pointsOpponent) {
 	if (sprite.position.x < 0 || sprite.position.x > width) {
 		if (sprite.position.x < 0) {
 			pointsOpponent++;
-			
-			Audio::Load("1_Pong/Assets/Sounds/boo.mp3");
-			Audio::Play();
+
+			audio.load("1_Pong/Assets/Sounds/boo.mp3");
+			audio.play();
 		}
 		if (sprite.position.x > width) {
 			pointsPlayer++;
 
-			Audio::Load("1_Pong/Assets/Sounds/cellebration.mp3");
-			Audio::Play();
+			audio.load("1_Pong/Assets/Sounds/cellebration.mp3");
+			audio.play();
 		}
 		
 		return true;

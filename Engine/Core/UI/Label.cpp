@@ -26,6 +26,10 @@ namespace EUI {
         loadFont(font, fontSize);
     }
 
+    void Label::updateWindowSize(float width, float height) {
+        glm::mat4 projection{ glm::ortho(0.0f, width, height, 0.0f) };
+        shader.setMat4("projection", projection, true);
+    }
     void Label::loadFont(std::string font, int fontSize)
     {
         characters.clear();
