@@ -165,6 +165,7 @@
   <ItemGroup>
     <ClInclude Include="Include\2D\Object.h" />
     <ClInclude Include="Include\2D\Rectangle.h" />
+    <ClInclude Include="Include\Audio.h" />
     <ClInclude Include="Include\Engine.h" />
     <ClInclude Include="Include\UI\Label.h" />
     <ClInclude Include="Include\UI\Test.h" />
@@ -185,6 +186,7 @@
   <ItemGroup>
     <ClCompile Include="Core\2D\Object.cpp" />
     <ClCompile Include="Core\2D\Rectangle.cpp" />
+    <ClCompile Include="Core\Audio.cpp" />
     <ClCompile Include="Core\Engine.cpp" />
     <ClCompile Include="Core\UI\Label.cpp" />
     <ClCompile Include="Core\UI\Test.cpp" />

@@ -7,6 +7,7 @@
 #include <Engine.h>
 #include <2D/Sprite.h>
 #include <2D/Rectangle.h>
+#include <Audio.h>
 
 class Ball {
 private:
