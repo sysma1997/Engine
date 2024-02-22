@@ -9,7 +9,7 @@
 #include <2D/Rectangle.h>
 #include <Audio.h>
 
-class Ball {
+class PongBall {
 private:
 	Audio audio;
 
@@ -22,7 +22,7 @@ public:
 	glm::vec2 direction;
 	float velocity;
 
-	Ball(E2D::Sprite& sprite);
+	PongBall(E2D::Sprite& sprite);
 
 	void update(float height, E2D::Rectangle& player, E2D::Rectangle& opponent);
 	void initRandomDirection();

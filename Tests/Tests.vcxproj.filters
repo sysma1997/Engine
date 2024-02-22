@@ -21,13 +21,19 @@
     <ClCompile Include="1_Pong\Pong.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="1_Pong\Player.cpp">
+    <ClCompile Include="1_Pong\PongPlayer.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="1_Pong\Ball.cpp">
+    <ClCompile Include="1_Pong\PongBall.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="1_Pong\Opponent.cpp">
+    <ClCompile Include="1_Pong\PongOpponent.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="2_Flappy_Bird\FlappyBird.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="2_Flappy_Bird\FlappyBirdPlayer.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,13 +41,19 @@
     <ClInclude Include="1_Pong\Pong.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="1_Pong\Player.h">
+    <ClInclude Include="1_Pong\PongPlayer.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="1_Pong\Ball.h">
+    <ClInclude Include="1_Pong\PongBall.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="1_Pong\Opponent.h">
+    <ClInclude Include="1_Pong\PongOpponent.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="2_Flappy_Bird\FlappyBird.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="2_Flappy_Bird\FlappyBirdPlayer.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

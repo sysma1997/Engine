@@ -9,8 +9,8 @@
 #include <UI/Label.h>
 #include <UI/Test.h>
 
-#include "Player.h"
-#include "Ball.h"
-#include "Opponent.h"
+#include "PongPlayer.h"
+#include "PongBall.h"
+#include "PongOpponent.h"
 
 void pong();

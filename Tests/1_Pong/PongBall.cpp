@@ -1,10 +1,10 @@
-#include "Ball.h"
+#include "PongBall.h"
 
-Ball::Ball(E2D::Sprite& sprite) : audio{ },
+PongBall::PongBall(E2D::Sprite& sprite) : audio{ },
 	sprite{ sprite }, direction{ 0.0f }, velocity{ 200.0f }, 
 	isTimeForNextCollision{ false }, timeForNextCollision{ 0.0f } {}
 
-bool Ball::checkCollision(E2D::Rectangle& pallet) {
+bool PongBall::checkCollision(E2D::Rectangle& pallet) {
 	bool collisionX{
 		sprite.position.x + sprite.size.x >= pallet.position.x && 
 		pallet.position.x + pallet.size.x >= sprite.position.x
@@ -17,7 +17,7 @@ bool Ball::checkCollision(E2D::Rectangle& pallet) {
 	return collisionX && collisionY;
 }
 
-void Ball::update(float height, E2D::Rectangle& player, E2D::Rectangle& opponent) {
+void PongBall::update(float height, E2D::Rectangle& player, E2D::Rectangle& opponent) {
 	if (isTimeForNextCollision) {
 		if (timeForNextCollision > 0.5f) isTimeForNextCollision = false;
 		timeForNextCollision += Engine::DeltaTime;
@@ -40,12 +40,12 @@ void Ball::update(float height, E2D::Rectangle& player, E2D::Rectangle& opponent
 		audio.play();
 	}
 }
-void Ball::initRandomDirection() {
+void PongBall::initRandomDirection() {
 	int leftRight{ rand() % 2 }, topDown{ rand() % 2 };
 	direction.x = (leftRight == 0) ? -1.0f : 1.0f;
 	direction.y = (topDown == 0) ? -1.0f : 1.0f;
 }
-bool Ball::outScreen(float width, int& pointsPlayer, int& pointsOpponent) {
+bool PongBall::outScreen(float width, int& pointsPlayer, int& pointsOpponent) {
 	if (sprite.position.x < 0 || sprite.position.x > width) {
 		if (sprite.position.x < 0) {
 			pointsOpponent++;

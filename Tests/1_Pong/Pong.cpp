@@ -18,7 +18,7 @@ void pong() {
 	E2D::Rectangle* opponent{ new E2D::Rectangle{engine->fWidth(), engine->fHeight()} };
 	E2D::Sprite ballSprite{ E2D::Sprite{*(new Texture{"1_Pong/Assets/Images/Ball.png", true}),
 		engine->fWidth(), engine->fHeight()} };
-	Ball* ball{ new Ball{ballSprite} };
+	PongBall* ball{ new PongBall{ballSprite} };
 
 	EUI::Label* label{ new EUI::Label{"1_Pong/Assets/Fonts/Robot_Font.otf", 64, engine->fWidth(), engine->fHeight()} };
 
@@ -85,14 +85,14 @@ void pong() {
 			}
 
 			if (state == PongState::GAME) {
-				playerProcessInput(*player, engine->fHeight());
+				pongPlayerProcessInput(*player, engine->fHeight());
 				ball->update(engine->fHeight(), *player, *opponent);
 				if (ball->outScreen(engine->fWidth(), pointsPlayer, pointsOpponent)) {
 					resetPosition();
 					ball->velocity = 200.0f;
 					ball->initRandomDirection();
 				}
-				iaOpponent(*opponent, ball->sprite, engine->fHeight());
+				pongIaOpponent(*opponent, ball->sprite, engine->fHeight());
 
 				if (pointsPlayer > 4 || pointsOpponent > 4)
 					state = PongState::RESULTS;
