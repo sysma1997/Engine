@@ -39,6 +39,22 @@ namespace E2D {
 		glDeleteVertexArrays(1, &VAO);
 	}
 
+	bool Object::CheckCollision(Object& object1, Object& object2) {
+		glm::vec2 object1StartCollision{ object1.position - (object1.size / 2.0f) };
+		glm::vec2 object1EndCollision{ object1.position + (object1.size / 2.0f) };
+		glm::vec2 object2StartCollision{ object2.position - (object2.size / 2.0f) };
+		glm::vec2 object2EndCollision{ object2.position + (object2.size / 2.0f)};
+
+		glm::vec2 differenceStart{ object1StartCollision - object2StartCollision };
+		glm::vec2 differenceEnd{ object1EndCollision - object2EndCollision };
+
+		if (differenceStart.x < object2.size.x && differenceStart.y < object2.size.y &&
+			differenceEnd.x > -object2.size.x && differenceEnd.y > -object2.size.y)
+			return true;
+
+		return false;
+	}
+
 	void Object::updateWindowSize() {
 		glm::mat4 projection{ glm::ortho(0.0f, Engine::FWidth, Engine::FHeight, 0.0f) };
 		shader.setMat4("projection", projection, true);

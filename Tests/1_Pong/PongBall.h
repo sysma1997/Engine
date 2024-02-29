@@ -15,8 +15,6 @@ private:
 
 	bool isTimeForNextCollision;
 	float timeForNextCollision;
-	
-	bool checkCollision(E2D::Rectangle& pallet);
 public:
 	E2D::Sprite sprite;
 	glm::vec2 direction;
@@ -25,6 +23,8 @@ public:
 	PongBall(E2D::Sprite& sprite);
 
 	void update(E2D::Rectangle& player, E2D::Rectangle& opponent);
+	void terminate();
+
 	void initRandomDirection();
 	bool outScreen(int& pointsPlayer, int& pointsOpponent);
 };

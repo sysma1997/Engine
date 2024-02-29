@@ -182,5 +182,6 @@ void pong() {
 	}
 
 	imgui->terminate();
+	ball->terminate();
 	engine->terminate();
 }

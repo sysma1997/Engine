@@ -17,6 +17,7 @@ namespace E2D {
 	public:
 		int indexTexture;
 		float timeChangeTexture;
+		bool pauseAnimation;
 
 		SpriteAnimated(std::vector<Texture> textures);
 

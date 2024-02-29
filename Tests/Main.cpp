@@ -7,9 +7,6 @@
 using namespace std;
 
 int main() {
-	flappyBird();
-	return 0;
-
 	cout << "Welcome to engine tests.\n";
 
 	while (true) {

@@ -3,7 +3,8 @@
 namespace E2D {
 	SpriteAnimated::SpriteAnimated(std::vector<Texture> textures) :
 		Object{ Shader{ "Shaders/2D/Sprite.vert", "Shaders/2D/Sprite.frag" }, false },
-		textures{ textures }, indexTexture{ 0 }, currentTime{ 0.0f }, timeChangeTexture{ 0.2f } {
+		textures{ textures }, indexTexture{ 0 }, currentTime{ 0.0f }, timeChangeTexture{ 0.2f }, 
+		pauseAnimation{ false } {
 		float vertices[]{
 			// pos      //tex
 			0.0f, 1.0f, 0.0f, 1.0f, 
@@ -31,13 +32,15 @@ namespace E2D {
 	}
 
 	void SpriteAnimated::draw() {
-		currentTime += Engine::DeltaTime;
-		if (currentTime > timeChangeTexture) {
-			currentTime = 0.0f;
+		if (!pauseAnimation) {
+			currentTime += Engine::DeltaTime;
+			if (currentTime > timeChangeTexture) {
+				currentTime = 0.0f;
 
-			indexTexture++;
-			if (indexTexture >= textures.size())
-				indexTexture = 0;
+				indexTexture++;
+				if (indexTexture >= textures.size())
+					indexTexture = 0;
+			}
 		}
 
 		Texture texture{ textures[indexTexture] };

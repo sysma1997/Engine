@@ -22,6 +22,8 @@ namespace E2D {
 		Object(Shader shader, bool isVertexInput = true);
 		~Object();
 
+		static bool CheckCollision(Object& objec1, Object& object2);
+
 		void updateWindowSize();
 
 		virtual void draw() = 0;

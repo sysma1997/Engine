@@ -10,4 +10,11 @@
 #include "FlappyBirdPlayer.h"
 #include "FlappyBirdObstacles.h"
 
+enum class FlappyBirdState {
+	MENU,
+	GAME,
+	PAUSE,
+	RESULT
+};
+
 void flappyBird();
