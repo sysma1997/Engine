@@ -5,6 +5,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "../Engine.h"
 #include "../Shader.h"
 
 namespace E2D {
@@ -13,17 +14,15 @@ namespace E2D {
 		GLuint VAO;
 		Shader shader;
 
-		float width, height;
-
 	public:
 		glm::vec2 position, size;
 		float rotate;
 		glm::vec3 color;
 
-		Object(Shader& shader, float width, float height, bool isVertexInput = true);
+		Object(Shader shader, bool isVertexInput = true);
 		~Object();
 
-		void updateWindowSize(float width, float height);
+		void updateWindowSize();
 
 		virtual void draw() = 0;
 	};

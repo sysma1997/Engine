@@ -10,19 +10,17 @@ private:
     float lastFrame;
 
 public:
+    static int Width, Height;
+    static float FWidth, FHeight;
     static bool Keys[1024];
     static bool KeyProcessed[1024];
     static float DeltaTime;
 
-    int width, height;
     int lastWidth, lastHeight;
     GLFWwindow* window;
 
     Engine(const char* title, int width = 800, int height = 600);
     ~Engine();
-
-    float fWidth();
-    float fHeight();
 
     bool isLoop();
     void closeLoop();

@@ -1,8 +1,8 @@
 #include "../../Include/2D/Sprite.h"
 
 namespace E2D {
-	Sprite::Sprite(Texture& texture, float width, float height) : 
-		Object{ *(new Shader{"Shaders/2D/Sprite.vert", "Shaders/2D/Sprite.frag"}), width, height, false},
+	Sprite::Sprite(Texture texture) : 
+		Object{ Shader{ "Shaders/2D/Sprite.vert", "Shaders/2D/Sprite.frag" }, false },
 		texture{ texture } {
 		float vertices[]{
 			// pos      // tex
@@ -28,15 +28,14 @@ namespace E2D {
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
 
-		glm::mat4 projection{ glm::ortho(0.0f, width, height, 0.0f) };
-		shader.setMat4("projection", projection, true);
+		updateWindowSize();
 	}
 
 	void Sprite::draw() {
 		glm::mat4 model{ 1.0f };
 		model = glm::translate(model, glm::vec3{ position, 0.0f });
-		model = glm::translate(model, glm::vec3{ size * -0.5f, 0.0f });
 		model = glm::rotate(model, glm::radians(rotate), glm::vec3{ 0.0f, 0.0f, 1.0f });
+		model = glm::translate(model, glm::vec3{ size * -0.5f, 0.0f });
 		model = glm::scale(model, glm::vec3{ size, 1.0f });
 		
 		shader.use();

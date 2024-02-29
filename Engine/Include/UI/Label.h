@@ -5,6 +5,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "../Engine.h"
 #include "../Shader.h"
 #include "../Texture.h"
 
@@ -25,9 +26,9 @@ namespace EUI {
         std::map<char, Character> characters;
         Shader shader;
         
-        Label(std::string font, int fontSize, float width, float height);
+        Label(std::string font, int fontSize);
         
-        void updateWindowSize(float width, float height);
+        void updateWindowSize();
         void loadFont(std::string font, int fontSize);
         void render(std::string text, glm::vec2 position, 
             float scale = 1.0f, glm::vec3 color = glm::vec3{1.0f});

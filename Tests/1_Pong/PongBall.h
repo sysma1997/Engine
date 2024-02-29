@@ -24,7 +24,7 @@ public:
 
 	PongBall(E2D::Sprite& sprite);
 
-	void update(float height, E2D::Rectangle& player, E2D::Rectangle& opponent);
+	void update(E2D::Rectangle& player, E2D::Rectangle& opponent);
 	void initRandomDirection();
-	bool outScreen(float width, int& pointsPlayer, int& pointsOpponent);
+	bool outScreen(int& pointsPlayer, int& pointsOpponent);
 };

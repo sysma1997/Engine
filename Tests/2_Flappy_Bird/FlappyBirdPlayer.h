@@ -6,12 +6,12 @@
 class FlappyBirdPlayer
 {
 private:
-	float mass;
+	float velocity;
 
 public:
 	E2D::SpriteAnimated sprite;
 
-	FlappyBirdPlayer(float width, float height);
+	FlappyBirdPlayer();
 
 	void processInput();
 	void update(float basePositionY);

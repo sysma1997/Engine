@@ -2,8 +2,8 @@
 
 using namespace glm;
 
-Shader::Shader() {}
-Shader::Shader(const char* vertexPath, const char* fragmentPath) {
+Shader::Shader() : id{ 0 } {}
+Shader::Shader(const char* vertexPath, const char* fragmentPath) : id{ 0 } {
     GLuint vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
     GLuint fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
     std::stringstream sstr;

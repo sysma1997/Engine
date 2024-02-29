@@ -4,13 +4,13 @@
 #include FT_FREETYPE_H
 
 namespace EUI {
-    Label::Label(std::string font, int fontSize, float width, float height) {
+    Label::Label(std::string font, int fontSize) {
         glEnable(GL_CULL_FACE);
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
         shader = Shader{ "Shaders/UI/Label.vert", "Shaders/UI/Label.frag" };
-        shader.setMat4("projection", glm::ortho(0.0f, width, height, 0.0f), true);
+        shader.setMat4("projection", glm::ortho(0.0f, Engine::FWidth, Engine::FHeight, 0.0f), true);
         shader.setInt("text", 0);
         
         glGenVertexArrays(1, &VAO);
@@ -26,8 +26,8 @@ namespace EUI {
         loadFont(font, fontSize);
     }
 
-    void Label::updateWindowSize(float width, float height) {
-        glm::mat4 projection{ glm::ortho(0.0f, width, height, 0.0f) };
+    void Label::updateWindowSize() {
+        glm::mat4 projection{ glm::ortho(0.0f, Engine::FWidth, Engine::FHeight, 0.0f) };
         shader.setMat4("projection", projection, true);
     }
     void Label::loadFont(std::string font, int fontSize)

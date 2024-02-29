@@ -1,9 +1,9 @@
 #include "../../Include/2D/Object.h"
 
 namespace E2D {
-	Object::Object(Shader& shader, float width, float height, bool isVertexInput) :
-		shader{ shader },
-		width{ width }, height{ height }, 
+	Object::Object(Shader shader, bool isVertexInput) : 
+		VAO{ 0 }, 
+		shader{ shader }, 
 		position{ 1.0f }, size{ 1.0f },
 		rotate{ 0.0f },
 		color{ 1.0f } {
@@ -33,14 +33,14 @@ namespace E2D {
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
 
-		updateWindowSize(width, height);
+		updateWindowSize();
 	}
 	Object::~Object() {
 		glDeleteVertexArrays(1, &VAO);
 	}
 
-	void Object::updateWindowSize(float width, float height) {
-		glm::mat4 projection{ glm::ortho(0.0f, width, height, 0.0f) };
+	void Object::updateWindowSize() {
+		glm::mat4 projection{ glm::ortho(0.0f, Engine::FWidth, Engine::FHeight, 0.0f) };
 		shader.setMat4("projection", projection, true);
 	}
 }

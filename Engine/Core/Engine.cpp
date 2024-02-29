@@ -1,12 +1,12 @@
 #include "../Include/Engine.h"
 
+int Engine::Width = 800, Engine::Height = 600;
+float Engine::FWidth = 800.0f, Engine::FHeight = 600.0f;
 bool Engine::Keys[1024];
 bool Engine::KeyProcessed[1024];
 float Engine::DeltaTime{ 0.0f };
 
-Engine::Engine(const char* title, int width, int height) : 
-    width{ width }, height{ height }, 
-    lastFrame{ 0.0f } {
+Engine::Engine(const char* title, int width, int height) : lastFrame{ 0.0f } {
     if (!glfwInit()) {
         std::cout << "Failed to init GLFW.\n";
         return;
@@ -43,6 +43,11 @@ Engine::Engine(const char* title, int width, int height) :
     // for 3D
     //glEnable(GL_DEPTH_TEST);
 
+    Width = width;
+    Height = height;
+    FWidth = static_cast<float>(Width);
+    FHeight = static_cast<float>(Height);
+
     setKeyCallback([](GLFWwindow* window, int key, int scancode, int action, int mods) {
         if (key >= 0 && key <= 1024) {
             if (action == GLFW_PRESS) Engine::Keys[key] = true;
@@ -55,13 +60,6 @@ Engine::Engine(const char* title, int width, int height) :
 }
 Engine::~Engine() {}
 
-float Engine::fWidth() {
-    return static_cast<float>(width);
-}
-float Engine::fHeight() {
-    return static_cast<float>(height);
-}
-
 bool Engine::isLoop() {
     return glfwWindowShouldClose(window) == 0;
 }
@@ -73,15 +71,21 @@ void Engine::newFrame(std::function<void()> updateWindowSize) {
     DeltaTime = currentFrame - lastFrame;
     lastFrame = currentFrame;
 
-    glfwGetFramebufferSize(window, &width, &height);
-    glViewport(0, 0, width, height);
+    glfwGetFramebufferSize(window, &Width, &Height);
+    glViewport(0, 0, Width, Height);
     //glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    if (width != lastWidth ||
-        height != lastHeight) {
-        if (width != lastWidth) lastWidth = width;
-        if (height != lastHeight) lastHeight = height;
+    if (Width != lastWidth ||
+        Height != lastHeight) {
+        if (Width != lastWidth) {
+            lastWidth = Width;
+            FWidth = static_cast<float>(Width);
+        }
+        if (Height != lastHeight) {
+            lastHeight = Height;
+            FHeight = static_cast<float>(Height);
+        }
 
         updateWindowSize();
     }

@@ -3,10 +3,10 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "../Libs/stb_image.h"
 
-Texture::Texture() {
+Texture::Texture() : width{ 0 }, height{ 0 } {
     glGenTextures(1, &id);
 }
-Texture::Texture(const char* path, bool rgba) {
+Texture::Texture(const char* path, bool rgba) : width{ 0 }, height{ 0 } {
     glGenTextures(1, &id);
     glBindTexture(GL_TEXTURE_2D, id);
 

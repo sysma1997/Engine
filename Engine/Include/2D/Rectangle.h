@@ -8,7 +8,7 @@
 namespace E2D {
 	class Rectangle : public Object {
 	public:
-		Rectangle(float width, float height);
+		Rectangle();
 
 		void draw() override;
 	};

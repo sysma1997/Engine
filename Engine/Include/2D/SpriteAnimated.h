@@ -18,7 +18,7 @@ namespace E2D {
 		int indexTexture;
 		float timeChangeTexture;
 
-		SpriteAnimated(std::vector<Texture> textures, float width, float height);
+		SpriteAnimated(std::vector<Texture> textures);
 
 		void draw() override;
 	};
