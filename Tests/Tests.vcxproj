@@ -199,6 +199,9 @@ xcopy "$(ProjectDir)..\Engine\Shaders" "$(ProjectDir)Shaders" /y /d /e /h /c /i<
     <ClCompile Include="2_Flappy_Bird\FlappyBird.cpp" />
     <ClCompile Include="2_Flappy_Bird\FlappyBirdPlayer.cpp" />
     <ClCompile Include="2_Flappy_Bird\FlappyBirdObstacles.cpp" />
+    <ClCompile Include="3_Breakout\Breakout.cpp" />
+    <ClCompile Include="3_Breakout\BreakoutPlayer.cpp" />
+    <ClCompile Include="3_Breakout\BreakoutBall.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="1_Pong\Pong.cpp" />
     <ClCompile Include="1_Pong\PongPlayer.cpp" />
@@ -212,6 +215,9 @@ xcopy "$(ProjectDir)..\Engine\Shaders" "$(ProjectDir)Shaders" /y /d /e /h /c /i<
     <ClInclude Include="2_Flappy_Bird\FlappyBird.h" />
     <ClInclude Include="2_Flappy_Bird\FlappyBirdPlayer.h" />
     <ClInclude Include="2_Flappy_Bird\FlappyBirdObstacles.h" />
+    <ClInclude Include="3_Breakout\Breakout.h" />
+    <ClInclude Include="3_Breakout\BreakoutPlayer.h" />
+    <ClInclude Include="3_Breakout\BreakoutBall.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

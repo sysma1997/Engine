@@ -60,6 +60,19 @@ Engine::Engine(const char* title, int width, int height) : lastFrame{ 0.0f } {
 }
 Engine::~Engine() {}
 
+bool Engine::KeyPressed(int key) {
+    return Engine::Keys[key];
+}
+bool Engine::KeyJustPressed(int key) {
+    if (Engine::Keys[key] && !Engine::KeyProcessed[key]) {
+        Engine::KeyProcessed[key] = true;
+
+        return true;
+    }
+
+    return false;
+}
+
 bool Engine::isLoop() {
     return glfwWindowShouldClose(window) == 0;
 }

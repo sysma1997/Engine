@@ -10,19 +10,21 @@ FlappyBirdPlayer::FlappyBirdPlayer() : audio{ },
 			Texture{"2_Flappy_Bird/Assets/Images/yellowbird-downflap.png", true},
 			Texture{"2_Flappy_Bird/Assets/Images/yellowbird-midflap.png", true},
 			Texture{"2_Flappy_Bird/Assets/Images/yellowbird-upflap.png", true}
-		} } {}
+		} } {
+	audio.load("wing", "2_Flappy_Bird/Assets/Sounds/wing.wav");
+	audio.load("die", "2_Flappy_Bird/Assets/Sounds/die.wav");
+	audio.load("hit", "2_Flappy_Bird/Assets/Sounds/hit.wav");
+	audio.load("point", "2_Flappy_Bird/Assets/Sounds/point.wav");
+}
 
 void FlappyBirdPlayer::processInput() {
 	if (isLose) return;
 
-	if (Engine::Keys[GLFW_KEY_SPACE] && !Engine::KeyProcessed[GLFW_KEY_SPACE]) {
-		Engine::KeyProcessed[GLFW_KEY_SPACE] = true;
-
+	if (Engine::KeyJustPressed(GLFW_KEY_SPACE)) {
 		sprite.rotate = -35.0f;
 		velocity = FLAPPY_BIRD_PLAYER_JUMP_FORCE;
 
-		audio.load("2_Flappy_Bird/Assets/Sounds/wing.wav");
-		audio.play();
+		audio.play("wing");
 	}
 }
 bool FlappyBirdPlayer::update(float basePositionY) {
@@ -40,13 +42,12 @@ bool FlappyBirdPlayer::update(float basePositionY) {
 	velocity = 0.0f;
 	sprite.pauseAnimation = true;
 
-	audio.load("2_Flappy_Bird/Assets/Sounds/die.wav");
-	audio.play();
+	audio.play("die");
 
 	return true;
 }
 void FlappyBirdPlayer::terminate() {
-	audio.~Audio();
+	audio.terminate();
 }
 
 void FlappyBirdPlayer::reset() {
@@ -54,10 +55,8 @@ void FlappyBirdPlayer::reset() {
 	sprite.pauseAnimation = false;
 }
 void FlappyBirdPlayer::setAudioHit() {
-	audio.load("2_Flappy_Bird/Assets/Sounds/hit.wav");
-	audio.play();
+	audio.play("hit");
 }
 void FlappyBirdPlayer::setAudioPoint() {
-	audio.load("2_Flappy_Bird/Assets/Sounds/point.wav");
-	audio.play();
+	audio.play("point");
 }

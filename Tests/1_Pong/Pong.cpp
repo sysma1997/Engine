@@ -54,8 +54,7 @@ void pong() {
 
 		if (state == PongState::MENU || 
 			state == PongState::RESULTS) {
-			if (Engine::Keys[GLFW_KEY_SPACE] && !Engine::KeyProcessed[GLFW_KEY_SPACE]) {
-				Engine::KeyProcessed[GLFW_KEY_SPACE] = true;
+			if (Engine::KeyJustPressed(GLFW_KEY_SPACE)) {
 				ball->initRandomDirection();
 				if (state == PongState::RESULTS) {
 					resetPosition();
@@ -65,20 +64,16 @@ void pong() {
 				
 				state = PongState::GAME;
 			}
-			if (Engine::Keys[GLFW_KEY_ESCAPE] && !Engine::KeyProcessed[GLFW_KEY_ESCAPE]) {
-				Engine::KeyProcessed[GLFW_KEY_ESCAPE] = true;
+			if (Engine::KeyJustPressed(GLFW_KEY_ESCAPE)) {
 				engine->closeLoop();
 			}
 		}
 		if (state == PongState::GAME || 
 			state == PongState::PAUSE) {
-			if (Engine::Keys[GLFW_KEY_ESCAPE] && !Engine::KeyProcessed[GLFW_KEY_ESCAPE]) {
-				Engine::KeyProcessed[GLFW_KEY_ESCAPE] = true;
+			if (Engine::KeyJustPressed(GLFW_KEY_ESCAPE)) {
 				state = (state == PongState::GAME) ? PongState::PAUSE : PongState::GAME;
 			}
-			if (state == PongState::PAUSE && 
-				(Engine::Keys[GLFW_KEY_Q] && !Engine::KeyProcessed[GLFW_KEY_Q])) {
-				Engine::KeyProcessed[GLFW_KEY_Q] = true;
+			if (state == PongState::PAUSE && Engine::KeyJustPressed(GLFW_KEY_Q)) {
 				engine->closeLoop();
 			}
 

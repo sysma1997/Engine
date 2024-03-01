@@ -3,16 +3,23 @@
 
 #include "1_Pong/Pong.h"
 #include "2_Flappy_Bird/FlappyBird.h"
+#include "3_Breakout/Breakout.h"
 
 using namespace std;
 
 int main() {
+	/*
+	breakout();
+	return 0;
+	*/
+
 	cout << "Welcome to engine tests.\n";
 
 	while (true) {
 		cout << "Select number to init project test:\n\n";
 		cout << "1 - Pong\n";
 		cout << "2 - Flappy Bird\n";
+		cout << "3 - Breakout\n";
 		cout << "10 - Exit\n";
 		
 		int option = 0;
@@ -23,6 +30,8 @@ int main() {
 			pong();
 		else if (option == 2)
 			flappyBird();
+		else if (option == 3)
+			breakout();
 		else if (option == 10)
 			break;
 

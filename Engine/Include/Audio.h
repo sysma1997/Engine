@@ -10,9 +10,9 @@ class Audio {
 private:
 	std::string LOG{ "SYSMA::ENGINE::AUDIO::" };
 
-	SoLoud::Soloud soloud;
+	SoLoud::Soloud* soloud;
+	std::map<std::string, SoLoud::Wav> samples;
 	SoLoud::Wav sample;
-	SoLoud::handle handle;
 
 public:
 	Audio();
@@ -20,6 +20,11 @@ public:
 
 	void load(std::string path);
 	void play();
-	//void pause();
-	//void stop();
+
+	void load(std::string name, std::string path);
+	SoLoud::handle play(std::string name);
+	SoLoud::handle playInLoop(std::string name);
+	void pause(SoLoud::handle handle, bool isPause);
+	void stop(SoLoud::handle handle);
+	void terminate();
 };

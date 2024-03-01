@@ -2,7 +2,11 @@
 
 PongBall::PongBall(E2D::Sprite& sprite) : audio{ },
 	sprite{ sprite }, direction{ 0.0f }, velocity{ 200.0f }, 
-	isTimeForNextCollision{ false }, timeForNextCollision{ 0.0f } {}
+	isTimeForNextCollision{ false }, timeForNextCollision{ 0.0f } {
+	audio.load("collision", "1_Pong/Assets/Sounds/ballCollision.wav");
+	audio.load("boo", "1_Pong/Assets/Sounds/boo.mp3");
+	audio.load("cellebration", "1_Pong/Assets/Sounds/cellebration.mp3");
+}
 
 void PongBall::update(E2D::Rectangle& player, E2D::Rectangle& opponent) {
 	if (isTimeForNextCollision) {
@@ -22,15 +26,23 @@ void PongBall::update(E2D::Rectangle& player, E2D::Rectangle& opponent) {
 		E2D::Object::CheckCollision(sprite, opponent))) {
 		isTimeForNextCollision = true;
 
+		//E2D::Object* pallet = nullptr;
+		//if (E2D::Object::CheckCollision(sprite, player))
+		//	pallet = &player;
+		//else pallet = &opponent;
+		//float diff{ sprite.position.x - pallet->position.x };
+		//float percentaje{ diff / (pallet->size.x / 2.0f) };
+		//float strenght{ 2.0f };
+		
 		direction.x = -direction.x;
-		velocity += 50.0f;
+		//direction.y = percentaje * strenght;
+		velocity += 10.0f;
 
-		audio.load("1_Pong/Assets/Sounds/ballCollision.wav");
-		audio.play();
+		audio.play("collision");
 	}
 }
 void PongBall::terminate() {
-	audio.~Audio();
+	audio.terminate();
 }
 
 void PongBall::initRandomDirection() {
@@ -42,15 +54,11 @@ bool PongBall::outScreen(int& pointsPlayer, int& pointsOpponent) {
 	if (sprite.position.x < 0 || sprite.position.x > Engine::FWidth) {
 		if (sprite.position.x < 0) {
 			pointsOpponent++;
-
-			audio.load("1_Pong/Assets/Sounds/boo.mp3");
-			audio.play();
+			audio.play("boo");
 		}
 		if (sprite.position.x > Engine::FWidth) {
 			pointsPlayer++;
-
-			audio.load("1_Pong/Assets/Sounds/cellebration.mp3");
-			audio.play();
+			audio.play("cellebration");
 		}
 		
 		return true;

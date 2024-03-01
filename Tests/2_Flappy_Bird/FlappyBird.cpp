@@ -42,18 +42,15 @@ void flappyBird() {
 		});
 
 		if (state == FlappyBirdState::MENU) {
-			if (Engine::Keys[GLFW_KEY_ESCAPE] && !Engine::KeyProcessed[GLFW_KEY_ESCAPE]) {
-				Engine::KeyProcessed[GLFW_KEY_ESCAPE] = true;
+			if (Engine::KeyJustPressed(GLFW_KEY_ESCAPE)) {
 				engine->closeLoop();
 			}
-			if (Engine::Keys[GLFW_KEY_SPACE] && !Engine::KeyProcessed[GLFW_KEY_SPACE]) {
-				Engine::KeyProcessed[GLFW_KEY_SPACE] = true;
+			if (Engine::KeyJustPressed(GLFW_KEY_SPACE)) {
 				state = FlappyBirdState::GAME;
 			}
 		}
 		else if (state == FlappyBirdState::GAME) {
-			if (Engine::Keys[GLFW_KEY_ESCAPE] && !Engine::KeyProcessed[GLFW_KEY_ESCAPE]) {
-				Engine::KeyProcessed[GLFW_KEY_ESCAPE] = true;
+			if (Engine::KeyJustPressed(GLFW_KEY_ESCAPE)) {
 				state = FlappyBirdState::PAUSE;
 			}
 
@@ -63,18 +60,15 @@ void flappyBird() {
 			obstacles->update(*base, *player, points, bestPoints);
 		}
 		else if (state == FlappyBirdState::PAUSE) {
-			if (Engine::Keys[GLFW_KEY_ESCAPE] && !Engine::KeyProcessed[GLFW_KEY_ESCAPE]) {
-				Engine::KeyProcessed[GLFW_KEY_ESCAPE] = true;
+			if (Engine::KeyJustPressed(GLFW_KEY_ESCAPE)) {
 				state = FlappyBirdState::GAME;
 			}
 		}
 		else if (state == FlappyBirdState::RESULT) {
-			if (Engine::Keys[GLFW_KEY_ESCAPE] && !Engine::KeyProcessed[GLFW_KEY_ESCAPE]) {
-				Engine::KeyProcessed[GLFW_KEY_ESCAPE] = true;
+			if (Engine::KeyJustPressed(GLFW_KEY_ESCAPE)) {
 				engine->closeLoop();
 			}
-			if (Engine::Keys[GLFW_KEY_SPACE] && !Engine::KeyProcessed[GLFW_KEY_SPACE]) {
-				Engine::KeyProcessed[GLFW_KEY_SPACE] = true;
+			if (Engine::KeyJustPressed(GLFW_KEY_SPACE)) {
 				points = 0;
 				player->reset();
 				obstacles->reset();
@@ -126,7 +120,7 @@ void flappyBird() {
 			label->render(text, position, 1.5f);
 		}
 
-		imgui->newFrame();
+		//imgui->newFrame();
 		//ImGui::Begin("base position");
 		//ImGui::Text("Position");
 		//ImGui::InputFloat("##basePosX", &base->position.x);
@@ -137,7 +131,7 @@ void flappyBird() {
 		//ImGui::SameLine();
 		//ImGui::InputFloat("##baseSizeY", &base->size.y);
 		//ImGui::End();
-		imgui->renderFrame();
+		//imgui->renderFrame();
 		engine->renderFrame();
 	}
 
