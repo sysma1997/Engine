@@ -5,5 +5,6 @@
 
 #include "BreakoutPlayer.h"
 #include "BreakoutBall.h"
+#include "BreakoutBricks.h"
 
 void breakout();

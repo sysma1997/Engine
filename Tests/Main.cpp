@@ -8,10 +8,8 @@
 using namespace std;
 
 int main() {
-	/*
 	breakout();
 	return 0;
-	*/
 
 	cout << "Welcome to engine tests.\n";
 

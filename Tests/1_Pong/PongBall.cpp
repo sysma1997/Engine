@@ -10,7 +10,10 @@ PongBall::PongBall(E2D::Sprite& sprite) : audio{ },
 
 void PongBall::update(E2D::Rectangle& player, E2D::Rectangle& opponent) {
 	if (isTimeForNextCollision) {
-		if (timeForNextCollision > 0.5f) isTimeForNextCollision = false;
+		if (timeForNextCollision > 0.1f) {
+			isTimeForNextCollision = false;
+			timeForNextCollision = 0.0f;
+		}
 		timeForNextCollision += Engine::DeltaTime;
 	}
 
@@ -25,17 +28,8 @@ void PongBall::update(E2D::Rectangle& player, E2D::Rectangle& opponent) {
 		(E2D::Object::CheckCollision(sprite, player) || 
 		E2D::Object::CheckCollision(sprite, opponent))) {
 		isTimeForNextCollision = true;
-
-		//E2D::Object* pallet = nullptr;
-		//if (E2D::Object::CheckCollision(sprite, player))
-		//	pallet = &player;
-		//else pallet = &opponent;
-		//float diff{ sprite.position.x - pallet->position.x };
-		//float percentaje{ diff / (pallet->size.x / 2.0f) };
-		//float strenght{ 2.0f };
 		
 		direction.x = -direction.x;
-		//direction.y = percentaje * strenght;
 		velocity += 10.0f;
 
 		audio.play("collision");

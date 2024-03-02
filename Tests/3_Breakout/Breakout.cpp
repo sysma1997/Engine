@@ -5,11 +5,13 @@ void breakout() {
 	
 	BreakoutPlayer* player{ new BreakoutPlayer{} };
 	BreakoutBall* ball{ new BreakoutBall{player->sprite.position.y, player->sprite.size.y} };
+	BreakoutBricks* bricks{ new BreakoutBricks{} };
 
 	while (engine->isLoop()) {
 		engine->newFrame([&] {
 			player->sprite.updateWindowSize();
 			ball->sprite.updateWindowSize();
+			bricks->updateWindowsSize();
 		});
 
 		player->processInput();
@@ -18,6 +20,7 @@ void breakout() {
 
 		player->sprite.draw();
 		ball->sprite.draw();
+		bricks->draw();
 
 		engine->renderFrame();
 	}
