@@ -18,6 +18,7 @@ public:
 
 	BreakoutBall(float playerPositionY, float playerSizeY);
 
+	void updateWindowSize(float playerPositionY, float playerSizeY);
 	void processInput();
 	void update(E2D::Sprite player);
 };

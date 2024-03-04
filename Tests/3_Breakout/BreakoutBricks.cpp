@@ -1,14 +1,15 @@
 #include "BreakoutBricks.h"
 
-
-BreakoutBricks::BreakoutBricks() {
+BreakoutBricks::BreakoutBricks(int columns, int rows) : bricks{}, columns{ columns }, rows{ rows } {
 	glm::vec2 size{ Engine::FWidth * 0.1f, Engine::FHeight * 0.05f };
 	glm::vec2 position{ size / 2.0f };
 
-	for (int y = 0; y < 4; y++) {
-		for (int x = 0; x < 10; x++) {
-			position.x = (size.x / 2.0f) * (x + 1);
-			position.y = (size.y / 2.0f) * (y + 1);
+	for (int y = 0; y < columns; y++) {
+		std::vector<BreakoutBrick> bricksRows{};
+		position.y = (size.y * (y + 1)) - (size.y / 2.0f);
+		
+		for (int x = 0; x < rows; x++) {
+			position.x = (size.x * (x + 1)) - (size.x / 2.0f);
 
 			std::string brickColor{ "3_Breakout/Assets/Images/brick-" };
 			if (y == 0) brickColor += "red.png";
@@ -19,25 +20,20 @@ BreakoutBricks::BreakoutBricks() {
 			E2D::Sprite sprite{ Texture{brickColor.c_str(), true} };
 			sprite.size = size;
 			sprite.position = position;
-			Brick brick{ sprite, false };
+			BreakoutBrick brick{ sprite, false };
 
-			bricks[x][y] = brick;
+			bricksRows.push_back(brick);
 		}
+		
+		bricks.push_back(bricksRows);
 	}
 }
 
-void BreakoutBricks::updateWindowsSize() {
-	for (int y = 0; y < 4; y++) {
-		for (int x = 0; x < 10; x++) {
-			Brick& brick{ bricks[x][y] };
-			if (!brick.isBreak) brick.sprite.updateWindowSize();
-		}
-	}
-}
 void BreakoutBricks::draw() {
-	for (int y = 0; y < 4; y++) {
-		for (int x = 0; x < 10; x++) {
-			Brick& brick{ bricks[x][y] };
+	for (int y = 0; y < columns; y++) {
+		for (int x = 0; x < rows; x++) {
+			BreakoutBrick& brick{ bricks[y][x] };
+
 			if (!brick.isBreak) brick.sprite.draw();
 		}
 	}

@@ -7,13 +7,18 @@ BreakoutBall::BreakoutBall(float playerPositionY, float playerSizeY) :
 	sprite{ Texture{"3_Breakout/Assets/Images/ball.png", true} }, 
 	isSubject{ true } {
 	srand(time(NULL));
+	
+	updateWindowSize(playerPositionY, playerSizeY);
+}
+
+void BreakoutBall::updateWindowSize(float playerPositionY, float playerSizeY) {
+	sprite.updateWindowSize();
 	sprite.size = glm::vec2{ Engine::FWidth * 0.03f };
 	sprite.position = glm::vec2{
 		(Engine::FWidth / 2.0f) - (sprite.size.x / 2.0f),
 		(playerPositionY - (playerSizeY / 2.0f)) - (sprite.size.y / 2.0f)
 	};
 }
-
 void BreakoutBall::processInput() {
 	if (isSubject && Engine::KeyJustPressed(GLFW_KEY_SPACE)) {
 		isSubject = false;

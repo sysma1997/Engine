@@ -11,5 +11,6 @@ public:
 
 	BreakoutPlayer();
 
+	void updateWindowSize();
 	void processInput();
 };
