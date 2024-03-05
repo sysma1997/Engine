@@ -7,8 +7,6 @@
 #include <Engine.h>
 #include <2D/Sprite.h>
 
-#include "BreakoutBall.h"
-
 struct BreakoutBrick {
 	E2D::Sprite sprite;
 	bool isBreak;

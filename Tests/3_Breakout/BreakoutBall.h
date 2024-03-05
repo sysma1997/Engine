@@ -10,6 +10,8 @@
 class BreakoutBall
 {
 private:
+	float timeCollision;
+	bool isCollision;
 	glm::vec2 direction;
 
 public:
@@ -21,4 +23,6 @@ public:
 	void updateWindowSize(float playerPositionY, float playerSizeY);
 	void processInput();
 	void update(E2D::Sprite player);
+
+	void collisionBrick();
 };

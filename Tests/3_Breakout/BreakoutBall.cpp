@@ -2,7 +2,9 @@
 
 const float BREAKOUT_BALL_VELOCITY = 320.0f;
 
-BreakoutBall::BreakoutBall(float playerPositionY, float playerSizeY) : 
+BreakoutBall::BreakoutBall(float playerPositionY, float playerSizeY) :
+	timeCollision{ 0.0f },
+	isCollision{ false },
 	direction{ 0 }, 
 	sprite{ Texture{"3_Breakout/Assets/Images/ball.png", true} }, 
 	isSubject{ true } {
@@ -34,6 +36,13 @@ void BreakoutBall::update(E2D::Sprite player) {
 
 		return;
 	}
+	if (isCollision) {
+		timeCollision += Engine::DeltaTime;
+		if (timeCollision > 0.5f) {
+			timeCollision = 0.0f;
+			isCollision = false;
+		}
+	}
 
 	sprite.position += direction * BREAKOUT_BALL_VELOCITY * Engine::DeltaTime;
 
@@ -50,4 +59,11 @@ void BreakoutBall::update(E2D::Sprite player) {
 		direction.x = percentaje * strenght;
 		direction.y *= -1;
 	}
+}
+
+void BreakoutBall::collisionBrick() {
+	if (isCollision) return;
+
+	direction.y *= -1;
+	isCollision = true;
 }
