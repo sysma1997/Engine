@@ -13,6 +13,7 @@ private:
 	float timeCollision;
 	bool isCollision;
 	glm::vec2 direction;
+	float velocity;
 
 public:
 	E2D::Sprite sprite;
@@ -22,7 +23,7 @@ public:
 
 	void updateWindowSize(float playerPositionY, float playerSizeY);
 	void processInput();
-	void update(E2D::Sprite player);
+	void update(E2D::Sprite player, int& lives);
 
 	void collisionBrick();
 };

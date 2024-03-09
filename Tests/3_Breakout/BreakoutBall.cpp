@@ -1,15 +1,12 @@
 #include "BreakoutBall.h"
 
-const float BREAKOUT_BALL_VELOCITY = 320.0f;
-
 BreakoutBall::BreakoutBall(float playerPositionY, float playerSizeY) :
 	timeCollision{ 0.0f },
 	isCollision{ false },
 	direction{ 0 }, 
+	velocity{ 280.0f },
 	sprite{ Texture{"3_Breakout/Assets/Images/ball.png", true} }, 
 	isSubject{ true } {
-	srand(time(NULL));
-	
 	updateWindowSize(playerPositionY, playerSizeY);
 }
 
@@ -29,7 +26,7 @@ void BreakoutBall::processInput() {
 		direction.y = -1;
 	}
 }
-void BreakoutBall::update(E2D::Sprite player) {
+void BreakoutBall::update(E2D::Sprite player, int& lives) {
 	if (isSubject) {
 		glm::vec2 diff{ player.position - sprite.position };
 		sprite.position.x += diff.x;
@@ -44,7 +41,7 @@ void BreakoutBall::update(E2D::Sprite player) {
 		}
 	}
 
-	sprite.position += direction * BREAKOUT_BALL_VELOCITY * Engine::DeltaTime;
+	sprite.position += direction * velocity * Engine::DeltaTime;
 
 	if (sprite.position.x < (sprite.size.x / 2.0f) ||
 		sprite.position.x > (Engine::FWidth - (sprite.size.x / 2.0f))) 
@@ -59,6 +56,12 @@ void BreakoutBall::update(E2D::Sprite player) {
 		direction.x = percentaje * strenght;
 		direction.y *= -1;
 	}
+
+	if (sprite.position.y > Engine::FHeight) {
+		isSubject = true;
+		updateWindowSize(player.position.y, player.size.y);
+		lives--;
+	}
 }
 
 void BreakoutBall::collisionBrick() {
@@ -66,4 +69,6 @@ void BreakoutBall::collisionBrick() {
 
 	direction.y *= -1;
 	isCollision = true;
+	velocity += 1.0f;
+	if (velocity > 360.0f) velocity = 360.0f;
 }
