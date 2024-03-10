@@ -7,7 +7,7 @@ enum class BreakoutStatus {
 };
 
 void breakoutBricksUpdateWindowSize(BreakoutBricks* bricks);
-void breakoutCheckCollisionBricksBall(BreakoutBricks* bricks, BreakoutBall* ball, 
+bool breakoutCheckCollisionBricksBall(BreakoutBricks* bricks, BreakoutBall* ball, 
 	int& points, int& bestPoints);
 
 void breakout() {
@@ -36,9 +36,6 @@ void breakout() {
 		};
 		ball->isSubject = true;
 		ball->updateWindowSize(player->sprite.position.y, player->sprite.size.y);
-
-		points = 0;
-		lives = 3;
 	};
 
 	std::ifstream readBestPoints{ "bestPoints.txt" };
@@ -64,12 +61,20 @@ void breakout() {
 			if (status == BreakoutStatus::PAUSE && Engine::KeyJustPressed(GLFW_KEY_Q))
 				engine->closeLoop();
 		}
+		if (status == BreakoutStatus::RESULT) {
+			if (Engine::KeyJustPressed(GLFW_KEY_SPACE)) {
+				lives = 3;
+				resetGame();
+			}
+		}
 
 		if (status == BreakoutStatus::GAME) {
 			player->processInput();
 			ball->processInput();
 			ball->update(player->sprite, lives);
-			breakoutCheckCollisionBricksBall(bricks, ball, points, bestPoints);
+			if (breakoutCheckCollisionBricksBall(bricks, ball, points, bestPoints)) {
+				status = BreakoutStatus::RESULT;
+			}
 		}
 
 		ball->sprite.draw();
@@ -78,13 +83,14 @@ void breakout() {
 
 		std::string text{ "Points: " + std::to_string(points) };
 		glm::vec2 position{ 5.0f };
+		glm::vec2 size{ label->getSizeText(text) };
 		label->render(text, position);
 		text = "Best points: " + std::to_string(bestPoints);
-		glm::vec2 size{ label->getSizeText(text) };
 		position = glm::vec2{
-			position.x,
+			position.x + size.x + 20.f,
 			position.y
 		};
+		label->render(text, position);
 		text = "Lives: " + std::to_string(lives);
 		size = label->getSizeText(text);
 		position = glm::vec2{ Engine::FWidth - size.x - 5.0f, 5.0f };
@@ -122,10 +128,18 @@ void breakout() {
 			position.x = (Engine::FWidth / 2.0f) - (size.x / 2.0f);
 			position.y += lastSizeY + 10.0f;
 			label->render(text, position);
+			text = "Press to 'SPACE' to init game";
+			size = label->getSizeText(text);
+			position.x = (Engine::FWidth / 2.0f) - (size.x / 2.0f);
+			position.y += lastSizeY + 10.0f;
+			label->render(text, position);
 		}
 
-		if (lives == 0)
+		if (lives == 0) {
+			points = 0;
+			lives = 3;
 			resetGame();
+		}
 
 		engine->renderFrame();
 	}
@@ -150,12 +164,17 @@ void breakoutBricksUpdateWindowSize(BreakoutBricks* bricks) {
 		}
 	}
 }
-void breakoutCheckCollisionBricksBall(BreakoutBricks* bricks, BreakoutBall* ball, 
+bool breakoutCheckCollisionBricksBall(BreakoutBricks* bricks, BreakoutBall* ball, 
 	int& points, int& bestPoints) {
+	int numBricksBreak{ 0 }, numMaxBricks{ bricks->columns * bricks->rows };
+
 	for (int y = 0; y < bricks->columns; y++) {
 		for (int x = 0; x < bricks->rows; x++) {
 			BreakoutBrick& brick{ bricks->bricks[y][x] };
-			if (brick.isBreak) continue;
+			if (brick.isBreak) {
+				numBricksBreak++;
+				continue;
+			}
 
 			if (E2D::Object::CheckCollision(brick.sprite, ball->sprite)) {
 				brick.isBreak = true;
@@ -172,4 +191,8 @@ void breakoutCheckCollisionBricksBall(BreakoutBricks* bricks, BreakoutBall* ball
 			}
 		}
 	}
+
+	if (numBricksBreak == numMaxBricks)
+		return true;
+	return false;
 }
