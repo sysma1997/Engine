@@ -6,6 +6,7 @@
 #include <glm/glm.hpp>
 #include <Engine.h>
 #include <2D/Sprite.h>
+#include <Audio.h>
 
 class BreakoutBall
 {
@@ -23,7 +24,7 @@ public:
 
 	void updateWindowSize(float playerPositionY, float playerSizeY);
 	void processInput();
-	void update(E2D::Sprite player, int& lives);
+	void update(E2D::Sprite player, int& lives, Audio& audio);
 
-	void collisionBrick();
+	void collisionBrick(Audio& audio);
 };

@@ -26,7 +26,7 @@ void BreakoutBall::processInput() {
 		direction.y = -1;
 	}
 }
-void BreakoutBall::update(E2D::Sprite player, int& lives) {
+void BreakoutBall::update(E2D::Sprite player, int& lives, Audio& audio) {
 	if (isSubject) {
 		glm::vec2 diff{ player.position - sprite.position };
 		sprite.position.x += diff.x;
@@ -55,6 +55,8 @@ void BreakoutBall::update(E2D::Sprite player, int& lives) {
 
 		direction.x = percentaje * strenght;
 		direction.y *= -1;
+
+		audio.play("collisionPallet");
 	}
 
 	if (sprite.position.y > Engine::FHeight) {
@@ -64,11 +66,13 @@ void BreakoutBall::update(E2D::Sprite player, int& lives) {
 	}
 }
 
-void BreakoutBall::collisionBrick() {
+void BreakoutBall::collisionBrick(Audio& audio) {
 	if (isCollision) return;
 
 	direction.y *= -1;
 	isCollision = true;
 	velocity += 1.0f;
 	if (velocity > 360.0f) velocity = 360.0f;
+
+	audio.play("collisionBrick");
 }
