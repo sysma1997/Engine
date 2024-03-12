@@ -8,11 +8,15 @@ enum class BreakoutStatus {
 
 void breakoutBricksUpdateWindowSize(BreakoutBricks* bricks);
 bool breakoutCheckCollisionBricksBall(BreakoutBricks* bricks, BreakoutBall* ball, 
-	int& points, int& bestPoints);
+	int& points, int& bestPoints, Audio& audio);
 
 void breakout() {
 	srand(time(NULL));
 	Engine* engine{ new Engine{"Breakout"} };
+	Audio* audio{ new Audio{} };
+	audio->load("ambientSound", "3_Breakout/Assets/Audio/breakout.mp3");
+	audio->load("collisionPallet", "3_Breakout/Assets/Audio/bleep.mp3");
+	audio->load("collisionBrick", "3_Breakout/Assets/Audio/solid.wav");
 	
 	BreakoutStatus status{ BreakoutStatus::GAME };
 	EUI::Label* label{ new EUI::Label{"3_Breakout/Assets/Fonts/OCRAEXT.TTF", 24} };
@@ -44,6 +48,8 @@ void breakout() {
 		bestPoints = std::stoi(line);
 	}
 
+	audio->playInLoop("ambientSound");
+
 	while (engine->isLoop()) {
 		engine->newFrame([&] {
 			label->updateWindowSize();
@@ -71,8 +77,8 @@ void breakout() {
 		if (status == BreakoutStatus::GAME) {
 			player->processInput();
 			ball->processInput();
-			ball->update(player->sprite, lives);
-			if (breakoutCheckCollisionBricksBall(bricks, ball, points, bestPoints)) {
+			ball->update(player->sprite, lives, *audio);
+			if (breakoutCheckCollisionBricksBall(bricks, ball, points, bestPoints, *audio)) {
 				status = BreakoutStatus::RESULT;
 			}
 		}
@@ -144,6 +150,7 @@ void breakout() {
 		engine->renderFrame();
 	}
 
+	audio->terminate();
 	engine->terminate();
 }
 
@@ -165,7 +172,7 @@ void breakoutBricksUpdateWindowSize(BreakoutBricks* bricks) {
 	}
 }
 bool breakoutCheckCollisionBricksBall(BreakoutBricks* bricks, BreakoutBall* ball, 
-	int& points, int& bestPoints) {
+	int& points, int& bestPoints, Audio& audio) {
 	int numBricksBreak{ 0 }, numMaxBricks{ bricks->columns * bricks->rows };
 
 	for (int y = 0; y < bricks->columns; y++) {
@@ -179,7 +186,7 @@ bool breakoutCheckCollisionBricksBall(BreakoutBricks* bricks, BreakoutBall* ball
 			if (E2D::Object::CheckCollision(brick.sprite, ball->sprite)) {
 				brick.isBreak = true;
 				points += 1;
-				ball->collisionBrick();
+				ball->collisionBrick(audio);
 
 				if (points > bestPoints) {
 					bestPoints = points;

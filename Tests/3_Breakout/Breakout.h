@@ -7,6 +7,7 @@
 #include <Engine.h>
 #include <2D/Sprite.h>
 #include <UI/Label.h>
+#include <Audio.h>
 
 #include "BreakoutPlayer.h"
 #include "BreakoutBall.h"
