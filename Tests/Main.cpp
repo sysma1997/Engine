@@ -4,11 +4,12 @@
 #include "1_Pong/Pong.h"
 #include "2_Flappy_Bird/FlappyBird.h"
 #include "3_Breakout/Breakout.h"
+#include "4_Jetpack_Joyride/JetpackJoyride.h"
 
 using namespace std;
 
 int main() {
-	breakout();
+	jetpackJoyride();
 	return 0;
 
 	cout << "Welcome to engine tests.\n";
@@ -18,6 +19,7 @@ int main() {
 		cout << "1 - Pong\n";
 		cout << "2 - Flappy Bird\n";
 		cout << "3 - Breakout\n";
+		cout << "4 - Jeypack Joyride\n";
 		cout << "10 - Exit\n";
 		
 		int option = 0;
@@ -30,6 +32,8 @@ int main() {
 			flappyBird();
 		else if (option == 3)
 			breakout();
+		else if (option == 4)
+			jetpackJoyride();
 		else if (option == 10)
 			break;
 

@@ -12,6 +12,7 @@ namespace E2D {
 		Texture texture;
 
 	public:
+
 		Sprite(Texture texture);
 
 		void draw() override;

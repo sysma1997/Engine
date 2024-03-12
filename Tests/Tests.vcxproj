@@ -203,6 +203,8 @@ xcopy "$(ProjectDir)..\Engine\Shaders" "$(ProjectDir)Shaders" /y /d /e /h /c /i<
     <ClCompile Include="3_Breakout\BreakoutPlayer.cpp" />
     <ClCompile Include="3_Breakout\BreakoutBall.cpp" />
     <ClCompile Include="3_Breakout\BreakoutBricks.cpp" />
+    <ClCompile Include="4_Jetpack_Joyride\JetpackJoyride.cpp" />
+    <ClCompile Include="4_Jetpack_Joyride\JetpackJoyrideMap.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="1_Pong\Pong.cpp" />
     <ClCompile Include="1_Pong\PongPlayer.cpp" />
@@ -220,6 +222,8 @@ xcopy "$(ProjectDir)..\Engine\Shaders" "$(ProjectDir)Shaders" /y /d /e /h /c /i<
     <ClInclude Include="3_Breakout\BreakoutPlayer.h" />
     <ClInclude Include="3_Breakout\BreakoutBall.h" />
     <ClInclude Include="3_Breakout\BreakoutBricks.h" />
+    <ClInclude Include="4_Jetpack_Joyride\JetpackJoyride.h" />
+    <ClInclude Include="4_Jetpack_Joyride\JetpackJoyrideMap.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
