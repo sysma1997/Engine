@@ -1,7 +1,7 @@
 #include "JetpackJoyride.h"
 
 void jetpackJoyride() {
-	Engine* engine{ new Engine{"Jetpack Joyride", 420, 612 } };
+	Engine* engine{ new Engine{ "Jetpack Joyride", 420, 612 } };
 
 	JetpackJoyrideMap* map{ new JetpackJoyrideMap{} };
 
