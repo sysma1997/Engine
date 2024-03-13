@@ -7,7 +7,7 @@ class JetpackJoyrideMap
 {
 private:
 	E2D::Sprite background[2];
-	E2D::Sprite floor;
+	E2D::Sprite floor[2];
 	float velocity;
 
 public:
