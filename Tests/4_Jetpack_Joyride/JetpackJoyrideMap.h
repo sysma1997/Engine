@@ -11,6 +11,7 @@ private:
 	float velocity;
 
 public:
+	float floorPosition;
 
 	JetpackJoyrideMap();
 

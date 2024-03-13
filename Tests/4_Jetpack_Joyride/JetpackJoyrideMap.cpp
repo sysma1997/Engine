@@ -9,7 +9,8 @@ JetpackJoyrideMap::JetpackJoyrideMap() :
 		E2D::Sprite{ Texture{"4_Jetpack_Joyride/Assets/Images/base.png", true} }, 
 		E2D::Sprite{ Texture{"4_Jetpack_Joyride/Assets/Images/base.png", true} }
 	},
-	velocity{ 200.0f } {
+	velocity{ 200.0f }, 
+	floorPosition{ 0.0f } {
 	background[0].size = glm::vec2{ Engine::FWidth * 3, Engine::FHeight };
 	background[0].position = glm::vec2{ Engine::FWidth / 2.0f, Engine::FHeight / 2.0f };
 	background[1].position = glm::vec2{
@@ -22,6 +23,8 @@ JetpackJoyrideMap::JetpackJoyrideMap() :
 	floor[0].position = glm::vec2{ Engine::FWidth / 2.0f, Engine::FHeight - (floor[0].size.y / 2.0f) };
 	floor[1].size = floor[0].size;
 	floor[1].position = glm::vec2{ floor[0].position.x + floor[0].size.x, floor[0].position.y };
+
+	floorPosition = floor[0].position.y - (floor[0].size.y / 2.0f);
 }
 
 void JetpackJoyrideMap::updateWindowSize() {
@@ -33,6 +36,8 @@ void JetpackJoyrideMap::updateWindowSize() {
 		floor[i].size = glm::vec2{ Engine::FWidth * 3, Engine::FHeight * 0.2f };
 		floor[i].position = glm::vec2{ floor[i].position.x, Engine::FHeight - (floor[i].size.y / 2.0f) };
 	}
+
+	floorPosition = floor[0].position.y - (floor[0].size.y / 2.0f);
 }
 void JetpackJoyrideMap::update() {
 	for (int i{ 0 }; i < 2; i++) {
