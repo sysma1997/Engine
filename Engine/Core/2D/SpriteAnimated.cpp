@@ -1,9 +1,9 @@
 #include "../../Include/2D/SpriteAnimated.h"
 
 namespace E2D {
-	SpriteAnimated::SpriteAnimated(std::vector<Texture> textures) :
+	SpriteAnimated::SpriteAnimated(std::string name, std::vector<Texture> textures) :
 		Object{ Shader{ "Shaders/2D/Sprite.vert", "Shaders/2D/Sprite.frag" }, false },
-		textures{ textures }, indexTexture{ 0 }, currentTime{ 0.0f }, timeChangeTexture{ 0.2f }, 
+		indexTexture{ 0 }, currentTime{ 0.0f }, timeChangeTexture{ 0.2f }, 
 		pauseAnimation{ false } {
 		float vertices[]{
 			// pos      //tex
@@ -29,8 +29,17 @@ namespace E2D {
 		glBindVertexArray(0);
 
 		updateWindowSize();
+
+		load(name, textures);
+		play(name);
 	}
 
+	void SpriteAnimated::load(std::string name, std::vector<Texture> textures) {
+		animations[name] = textures;
+	}
+	void SpriteAnimated::play(std::string name) {
+		currentAnimation = name;
+	}
 	void SpriteAnimated::draw() {
 		if (!pauseAnimation) {
 			currentTime += Engine::DeltaTime;
@@ -38,12 +47,12 @@ namespace E2D {
 				currentTime = 0.0f;
 
 				indexTexture++;
-				if (indexTexture >= textures.size())
+				if (indexTexture >= animations[currentAnimation].size())
 					indexTexture = 0;
 			}
 		}
 
-		Texture texture{ textures[indexTexture] };
+		Texture texture{ animations[currentAnimation][indexTexture] };
 
 		glm::mat4 model{ 1.0f };
 		model = glm::translate(model, glm::vec3{ position, 0.0f });

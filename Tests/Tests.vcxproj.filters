@@ -60,6 +60,9 @@
     <ClCompile Include="4_Jetpack_Joyride\JetpackJoyridePlayer.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="4_Jetpack_Joyride\JetpackJoyrideRocket.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="1_Pong\Pong.h">
@@ -102,6 +105,9 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="4_Jetpack_Joyride\JetpackJoyridePlayer.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="4_Jetpack_Joyride\JetpackJoyrideRocket.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

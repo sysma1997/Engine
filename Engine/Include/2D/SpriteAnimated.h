@@ -1,6 +1,8 @@
 #pragma once
 
+#include <string>
 #include <vector>
+#include <map>
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 
@@ -11,16 +13,19 @@
 namespace E2D {
 	class SpriteAnimated : public Object {
 	private:
-		std::vector<Texture> textures;
+		std::map<std::string, std::vector<Texture>> animations;
 		float currentTime;
 
 	public:
+		std::string currentAnimation;
 		int indexTexture;
 		float timeChangeTexture;
 		bool pauseAnimation;
 
-		SpriteAnimated(std::vector<Texture> textures);
+		SpriteAnimated(std::string name, std::vector<Texture> textures);
 
+		void load(std::string name, std::vector<Texture> textures);
+		void play(std::string name);
 		void draw() override;
 	};
 }

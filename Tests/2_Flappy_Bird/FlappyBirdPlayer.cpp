@@ -6,11 +6,11 @@ const float FLAPPY_BIRD_PLAYER_JUMP_FORCE = -380.0f;
 FlappyBirdPlayer::FlappyBirdPlayer() : audio{ }, 
 	velocity{ 0.0f },
 	isLose{ false }, 
-	sprite{ {
-			Texture{"2_Flappy_Bird/Assets/Images/yellowbird-downflap.png", true},
-			Texture{"2_Flappy_Bird/Assets/Images/yellowbird-midflap.png", true},
-			Texture{"2_Flappy_Bird/Assets/Images/yellowbird-upflap.png", true}
-		} } {
+	sprite{ "flap", {
+		Texture{"2_Flappy_Bird/Assets/Images/yellowbird-downflap.png", true},
+		Texture{"2_Flappy_Bird/Assets/Images/yellowbird-midflap.png", true},
+		Texture{"2_Flappy_Bird/Assets/Images/yellowbird-upflap.png", true}
+	} } {
 	audio.load("wing", "2_Flappy_Bird/Assets/Sounds/wing.wav");
 	audio.load("die", "2_Flappy_Bird/Assets/Sounds/die.wav");
 	audio.load("hit", "2_Flappy_Bird/Assets/Sounds/hit.wav");
