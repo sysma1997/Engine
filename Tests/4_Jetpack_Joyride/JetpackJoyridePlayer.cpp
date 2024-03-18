@@ -43,7 +43,7 @@ void JetpackJoyridePlayer::updateWindowSize(float floorPosition) {
 	sprite.size = glm::vec2{ Engine::FWidth * 0.05f };
 	sprite.position = glm::vec2{ Engine::FWidth * 0.3f, floorPosition - (sprite.size.y / 2.0f) };
 }
-void JetpackJoyridePlayer::update() {
+void JetpackJoyridePlayer::update(int& points) {
 	if (sprite.position.y < (floorPosition - (sprite.size.y / 2.0f))) {
 		velocity.y += JETPACK_JOYRIDE_PLAYER_GRAVITY * Engine::DeltaTime;
 		sprite.play("fall");
@@ -71,6 +71,8 @@ void JetpackJoyridePlayer::update() {
 			Engine::FWidth - (sprite.size.x / 2.0f), 
 			floorPosition - (sprite.size.y / 2.0f)
 		});
+
+	points += 1;
 }
 void JetpackJoyridePlayer::draw() {
 	sprite.draw();
@@ -78,4 +80,10 @@ void JetpackJoyridePlayer::draw() {
 
 float JetpackJoyridePlayer::getPositionY() {
 	return sprite.position.y;
+}
+void JetpackJoyridePlayer::pause(bool isPause) {
+	sprite.pauseAnimation = isPause;
+}
+E2D::Object& JetpackJoyridePlayer::getSprite() {
+	return sprite;
 }

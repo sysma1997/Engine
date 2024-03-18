@@ -4,6 +4,7 @@
 #include <functional>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
 
 class Engine {
 private:
@@ -33,4 +34,6 @@ public:
     void terminate();
 
     void setKeyCallback(GLFWkeyfun callback);
+    glm::vec2 getSize();
+    glm::vec2 getSizeCenter();
 };

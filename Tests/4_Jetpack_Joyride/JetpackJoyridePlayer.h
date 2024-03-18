@@ -16,8 +16,10 @@ public:
 	JetpackJoyridePlayer(float floorPosition);
 
 	void updateWindowSize(float floorPosition);
-	void update();
+	void update(int& points);
 	void draw();
 
 	float getPositionY();
+	void pause(bool isPause);
+	E2D::Object& getSprite();
 };

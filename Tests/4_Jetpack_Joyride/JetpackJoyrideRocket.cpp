@@ -79,3 +79,6 @@ bool JetpackJoyrideRocket::isOutWindow() {
 
 	return false;
 }
+bool JetpackJoyrideRocket::isPlayerCollision(E2D::Object& player) {
+	return E2D::Object::CheckCollision(rocket, player);
+}

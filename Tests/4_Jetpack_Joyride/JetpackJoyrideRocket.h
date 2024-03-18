@@ -30,4 +30,5 @@ public:
 	void draw();
 
 	bool isOutWindow();
+	bool isPlayerCollision(E2D::Object& player);
 };
