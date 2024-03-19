@@ -28,4 +28,6 @@ public:
 	void updateWindowSize();
 	void update();
 	void draw();
+
+	bool isPlayerCollision(E2D::Object& player);
 };

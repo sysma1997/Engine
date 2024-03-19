@@ -61,3 +61,14 @@ void JetpackJoyrideObstacles::draw() {
 		obstacle.sprite.draw();
 	}
 }
+
+bool JetpackJoyrideObstacles::isPlayerCollision(E2D::Object& player) {
+	for (int i{ 0 }; i < obstacles.size(); i++) {
+		Obstacle& obstacle{ obstacles[i] };
+
+		if (E2D::Object::CheckCollision(obstacle.sprite, player))
+			return true;
+	}
+
+	return false;
+}
