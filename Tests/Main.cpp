@@ -6,10 +6,13 @@
 #include "3_Breakout/Breakout.h"
 #include "4_Jetpack_Joyride/JetpackJoyride.h"
 
+#include "Test.h"
+
 using namespace std;
 
 int main() {
-	jetpackJoyride();
+	//jetpackJoyride();
+	test();
 	return 0;
 
 	cout << "Welcome to engine tests.\n";
