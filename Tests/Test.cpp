@@ -11,7 +11,7 @@ void test() {
 		E2D::Rectangle{}
 	};
 
-	float width{ 100.0f }, height{ 100.0f };
+	float width{ 150.0f }, height{ 100.0f };
 	auto init = [&](glm::vec2 position, float rotate) {
 		rectangle.size = glm::vec2{ width, height };
 
@@ -31,17 +31,28 @@ void test() {
 		glm::vec2 radio{ width / 2.0f, height / 2.0f };
 		float rrotate{ glm::radians(rotate) };
 		
-		float rextra{ glm::radians(270.0f) };
-		collision[0].position.x = (radio.x * glm::cos(rrotate + rextra) - radio.y * glm::sin(rrotate + rextra)) + ro.position.x;
-		collision[0].position.y = (radio.x * glm::sin(rrotate + rextra) + radio.y * glm::cos(rrotate + rextra)) + ro.position.y;
-		float rextra1{ glm::radians(180.0f) };
-		collision[1].position.x = (radio.x * glm::cos(rrotate + rextra1) - radio.y * glm::sin(rrotate + rextra1)) + ro.position.x;
-		collision[1].position.y = (radio.x * glm::sin(rrotate + rextra1) + radio.y * glm::cos(rrotate + rextra1)) + ro.position.y;
-		float rextra2{ glm::radians(90.0f) };
-		collision[2].position.x = (radio.x * glm::cos(rrotate + rextra2) - radio.y * glm::sin(rrotate + rextra2)) + ro.position.x;
-		collision[2].position.y = (radio.x * glm::sin(rrotate + rextra2) + radio.y * glm::cos(rrotate + rextra2)) + ro.position.y;
 		collision[3].position.x = (radio.x * glm::cos(rrotate) - radio.y * glm::sin(rrotate)) + ro.position.x;
 		collision[3].position.y = (radio.x * glm::sin(rrotate) + radio.y * glm::cos(rrotate)) + ro.position.y;
+		float degress{ glm::degrees(glm::atan((collision[3].position.y - ro.position.y) / 
+			(collision[3].position.x - ro.position.x))) };
+
+		glm::vec2 collPos{ ro.position.x - radio.x, ro.position.y + radio.y };
+		float x{ collPos.x - collision[3].position.x };
+		if (x == 0) x = 1;
+		float y{ collPos.y - collision[3].position.y };
+		if (y == 0) y = 1;
+		float degress2{ glm::degrees(glm::atan(y / x)) };
+		float rextra2{ glm::radians(degress2) };
+		collision[2].position.x = (radio.x * glm::cos(rrotate + rextra2) - radio.y * glm::sin(rrotate + rextra2)) + ro.position.x;
+		collision[2].position.y = (radio.x * glm::sin(rrotate + rextra2) + radio.y * glm::cos(rrotate + rextra2)) + ro.position.y;
+		
+		//float rextra1{ glm::radians(180.0f) };
+		//collision[1].position.x = (radio.x * glm::cos(rrotate + rextra1) - radio.y * glm::sin(rrotate + rextra1)) + ro.position.x;
+		//collision[1].position.y = (radio.x * glm::sin(rrotate + rextra1) + radio.y * glm::cos(rrotate + rextra1)) + ro.position.y;
+
+		//float rextra{ glm::radians(270.0f) };
+		//collision[0].position.x = (radio.x * glm::cos(rrotate + rextra) - radio.y * glm::sin(rrotate + rextra)) + ro.position.x;
+		//collision[0].position.y = (radio.x * glm::sin(rrotate + rextra) + radio.y * glm::cos(rrotate + rextra)) + ro.position.y;
 	};
 
 	glm::vec2 position{ engine->getSizeCenter() };
