@@ -28,30 +28,20 @@ void test() {
 		}
 
 		E2D::Rectangle ro{ collision[4] };
-		collision[0].position = glm::vec2{
-			ro.position.x - (width / 2.0f),
-			ro.position.y - (height / 2.0f)
-		};
-		collision[0].position.x =
-			((width / 2.0f) * glm::cos(rotate * Engine::DeltaTime) -
-			(height / 2.0f) * glm::sin(rotate * Engine::DeltaTime)) +
-			ro.position.x;
-		collision[0].position.y =
-			((width / 2.0f) * glm::sin(rotate * Engine::DeltaTime) +
-			(height / 2.0f) * glm::cos(rotate * Engine::DeltaTime)) +
-			ro.position.y;
-		collision[1].position = glm::vec2{
-			ro.position.x + (width / 2.0f),
-			ro.position.y - (height / 2.0f)
-		};
-		collision[2].position = glm::vec2{
-			ro.position.x - (width / 2.0f),
-			ro.position.y + (height / 2.0f)
-		};
-		collision[3].position = glm::vec2{
-			ro.position.x + (width / 2.0f),
-			ro.position.y + (height / 2.0f)
-		};
+		glm::vec2 radio{ width / 2.0f, height / 2.0f };
+		float rrotate{ glm::radians(rotate) };
+		
+		float rextra{ glm::radians(270.0f) };
+		collision[0].position.x = (radio.x * glm::cos(rrotate + rextra) - radio.y * glm::sin(rrotate + rextra)) + ro.position.x;
+		collision[0].position.y = (radio.x * glm::sin(rrotate + rextra) + radio.y * glm::cos(rrotate + rextra)) + ro.position.y;
+		float rextra1{ glm::radians(180.0f) };
+		collision[1].position.x = (radio.x * glm::cos(rrotate + rextra1) - radio.y * glm::sin(rrotate + rextra1)) + ro.position.x;
+		collision[1].position.y = (radio.x * glm::sin(rrotate + rextra1) + radio.y * glm::cos(rrotate + rextra1)) + ro.position.y;
+		float rextra2{ glm::radians(90.0f) };
+		collision[2].position.x = (radio.x * glm::cos(rrotate + rextra2) - radio.y * glm::sin(rrotate + rextra2)) + ro.position.x;
+		collision[2].position.y = (radio.x * glm::sin(rrotate + rextra2) + radio.y * glm::cos(rrotate + rextra2)) + ro.position.y;
+		collision[3].position.x = (radio.x * glm::cos(rrotate) - radio.y * glm::sin(rrotate)) + ro.position.x;
+		collision[3].position.y = (radio.x * glm::sin(rrotate) + radio.y * glm::cos(rrotate)) + ro.position.y;
 	};
 
 	glm::vec2 position{ engine->getSizeCenter() };
@@ -117,6 +107,19 @@ void test() {
 		ImGui::InputFloat("##rotate", &rotate);
 		if (ImGui::Button("update")) init(position, rotate);
 		ImGui::End();
+
+		for (int i{ 0 }; i < 4; i++) {
+			ImGui::Begin(("Cube small collision " + std::to_string(i)).c_str());
+			ImGui::Text("Position");
+			ImGui::InputFloat("##positionX", &collision[i].position.x);
+			ImGui::SameLine();
+			ImGui::InputFloat("##positionY", &collision[i].position.y);
+			ImGui::NewLine();
+			ImGui::Text("Degress");
+			float degress = glm::degrees(glm::atan(collision[i].position.y - position.y, collision[i].position.x - position.x));
+			ImGui::InputFloat("##degress", &degress);
+			ImGui::End();
+		}
 		ui->renderFrame();
 
 		engine->renderFrame();
