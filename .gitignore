@@ -1,6 +1,7 @@
 .vs/
 .vscode/
 Engine/x64/
+Pong/x64/
 Tests/x64/
 Tests/bestPoints.txt
 x64/

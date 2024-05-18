@@ -12,8 +12,8 @@ using namespace std;
 
 int main() {
 	//jetpackJoyride();
-	test();
-	return 0;
+	//test();
+	//return 0;
 
 	cout << "Welcome to engine tests.\n";
 
