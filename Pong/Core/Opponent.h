@@ -3,15 +3,16 @@
 #include <Engine.h>
 #include <2D/Rectangle.h>
 
-class Player
+class Opponent
 {
 private:
 	E2D::Rectangle* sprite;
+
 public:
-	Player();
+	Opponent();
 
 	void updateWindowSize();
-	void progress();
+	void progress(glm::vec2 ball);
 	void draw();
 
 	E2D::Object* getSprite();

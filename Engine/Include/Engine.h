@@ -26,6 +26,8 @@ public:
 
     static bool KeyPressed(int key);
     static bool KeyJustPressed(int key);
+    static glm::vec2 GetSize();
+    static glm::vec2 GetSizeCenter();
 
     bool isLoop();
     void closeLoop();
@@ -34,6 +36,4 @@ public:
     void terminate();
 
     void setKeyCallback(GLFWkeyfun callback);
-    glm::vec2 getSize();
-    glm::vec2 getSizeCenter();
 };

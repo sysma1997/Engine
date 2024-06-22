@@ -72,6 +72,12 @@ bool Engine::KeyJustPressed(int key) {
 
     return false;
 }
+glm::vec2 Engine::GetSize() {
+    return glm::vec2{ FWidth, FHeight };
+}
+glm::vec2 Engine::GetSizeCenter() {
+    return glm::vec2{ FWidth / 2.0f, FHeight / 2.0f };
+}
 
 bool Engine::isLoop() {
     return glfwWindowShouldClose(window) == 0;
@@ -114,10 +120,4 @@ void Engine::terminate() {
 
 void Engine::setKeyCallback(GLFWkeyfun callback) {
     glfwSetKeyCallback(window, callback);
-}
-glm::vec2 Engine::getSize() {
-    return glm::vec2{ FWidth, FHeight };
-}
-glm::vec2 Engine::getSizeCenter() {
-    return glm::vec2{ FWidth / 2.0f, FHeight / 2.0f };
 }

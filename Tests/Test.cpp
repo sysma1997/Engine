@@ -45,7 +45,7 @@ void test() {
 		collision[0].position.y = (radio.x * glm::sin(rrotate + rotationExtra) + radio.y * glm::cos(rrotate + rotationExtra)) + rectangle.position.y;
 	};
 
-	glm::vec2 position{ engine->getSizeCenter() };
+	glm::vec2 position{ Engine::GetSizeCenter() };
 	float rotate{ 0.0f };
 	init(position, rotate);
 	while(engine->isLoop()) {
@@ -81,7 +81,7 @@ void test() {
 
 			position = glm::clamp(position, 
 				glm::vec2{ maxWidth, maxHeight }, 
-				engine->getSize() - (glm::vec2{ maxWidth, maxHeight }));
+				Engine::GetSize() - (glm::vec2{ maxWidth, maxHeight }));
 
 			init(position, rotate);
 		}

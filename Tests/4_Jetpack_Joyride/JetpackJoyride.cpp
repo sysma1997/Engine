@@ -113,7 +113,7 @@ void jetpackJoyride() {
 		if (bestPoints != 0) {
 			text = "Best points: " + std::to_string(bestPoints);
 			glm::vec2 size{ label->getSizeText(text) };
-			glm::vec2 position{ engine->getSizeCenter().x - (size.x / 2.0f), 10.0f };
+			glm::vec2 position{ Engine::GetSizeCenter().x - (size.x / 2.0f), 10.0f };
 			label->render(text, position);
 		}
 
@@ -129,28 +129,28 @@ void jetpackJoyride() {
 		if (status == JetpackJoyrideStatus::PAUSE) {
 			text = "PAUSE";
 			glm::vec2 size{ label->getSizeText(text) };
-			glm::vec2 position{ engine->getSizeCenter() - (size / 2.0f) };
+			glm::vec2 position{ Engine::GetSizeCenter() - (size / 2.0f) };
 			label->render(text, position);
 		}
 		if (status == JetpackJoyrideStatus::RESULT) {
 			text = "You lose";
 			glm::vec2 size{ label->getSizeText(text) };
-			glm::vec2 position{ engine->getSizeCenter() - (size / 2.0f) };
+			glm::vec2 position{ Engine::GetSizeCenter() - (size / 2.0f) };
 			position.y -= size.y / 2.0f;
 			label->render(text, position);
 			text = ((points > bestPoints) ? "Your best score: " : "Your score: ") + std::to_string(points);
 			size = label->getSizeText(text);
-			position = engine->getSizeCenter() - (size / 2.0f);
+			position = Engine::GetSizeCenter() - (size / 2.0f);
 			position.y += size.y / 2.0f;
 			label->render(text, position);
 			text = "Press 'SPACE' to reset game";
 			size = label->getSizeText(text);
-			position.x = engine->getSizeCenter().x - (size.x / 2.0f);
+			position.x = Engine::GetSizeCenter().x - (size.x / 2.0f);
 			position.y += size.y;
 			label->render(text, position);
 			text = "Press 'ESCAPE' to exit game";
 			size = label->getSizeText(text);
-			position.x = engine->getSizeCenter().x - (size.x / 2.0f);
+			position.x = Engine::GetSizeCenter().x - (size.x / 2.0f);
 			position.y += size.y;
 			label->render(text, position);
 		}
