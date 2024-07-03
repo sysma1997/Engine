@@ -21,7 +21,7 @@ public:
     int lastWidth, lastHeight;
     GLFWwindow* window;
 
-    Engine(const char* title, int width = 800, int height = 600);
+    Engine(const char* title, int width = 800, int height = 600, bool resizable = true);
     ~Engine();
 
     static bool KeyPressed(int key);

@@ -14,6 +14,10 @@ Ball::Ball() : velocity{ 200.0f } {
 		(leftRight == 0) ? -1.0f : 1.0f,
 		(upDown == 0) ? -1.0f : 1.0f
 	};
+
+	audio.load("collision", "Assets/Sounds/ballCollision.wav");
+	audio.load("boo", "Assets/Sounds/boo.mp3");
+	audio.load("cellebration", "Assets/Sounds/cellebration.mp3");
 }
 
 void Ball::updateWindowSize() {
@@ -43,6 +47,8 @@ void Ball::progress(E2D::Object* player, E2D::Object* opponent) {
 		
 		velocity += 15.0f;
 		isTimeCollision = false;
+
+		audio.play("collision");
 	}
 }
 void Ball::draw() {
@@ -54,10 +60,14 @@ glm::vec2 Ball::getPosition() {
 }
 int Ball::isOut() {
 	glm::vec2 middle{ sprite->size / 2.0f };
-	if (sprite->position.x < middle.x)
+	if (sprite->position.x < middle.x) {
+		audio.play("boo");
 		return 2;
-	else if (sprite->position.x > (Engine::FWidth + middle.x))
+	}
+	else if (sprite->position.x > (Engine::FWidth + middle.x)) {
+		audio.play("cellebration");
 		return 1;
+	}
 	else return 0;
 }
 void Ball::reset() {

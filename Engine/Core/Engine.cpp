@@ -6,7 +6,7 @@ bool Engine::Keys[1024];
 bool Engine::KeyProcessed[1024];
 float Engine::DeltaTime{ 0.0f };
 
-Engine::Engine(const char* title, int width, int height) : lastFrame{ 0.0f } {
+Engine::Engine(const char* title, int width, int height, bool resizable) : lastFrame{ 0.0f } {
     if (!glfwInit()) {
         std::cout << "Failed to init GLFW.\n";
         return;
@@ -20,6 +20,8 @@ Engine::Engine(const char* title, int width, int height) : lastFrame{ 0.0f } {
 #ifdef __APPLE__
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
+
+    glfwWindowHint(GLFW_RESIZABLE, (resizable) ? GL_TRUE : GL_FALSE);
 
     window = glfwCreateWindow(width, height, title, NULL, NULL);
     if (window == NULL) {

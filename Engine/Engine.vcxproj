@@ -192,6 +192,7 @@
     <ClCompile Include="Core\Engine.cpp" />
     <ClCompile Include="Core\UI\Label.cpp" />
     <ClCompile Include="Core\UI\Test.cpp" />
+    <ClCompile Include="Include\Command.h" />
     <ClCompile Include="Libs\imgui\imgui.cpp" />
     <ClCompile Include="Libs\imgui\imgui_demo.cpp" />
     <ClCompile Include="Libs\imgui\imgui_draw.cpp" />

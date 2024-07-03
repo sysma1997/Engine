@@ -7,6 +7,7 @@ class Player
 {
 private:
 	E2D::Rectangle* sprite;
+
 public:
 	Player();
 

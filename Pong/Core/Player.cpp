@@ -24,7 +24,7 @@ void Player::updateWindowSize() {
 void Player::progress() {
 	if (Engine::KeyPressed(GLFW_KEY_UP)) 
 		sprite->position.y -= PLAYER_VELOCITY * Engine::DeltaTime;
-	if (Engine::KeyPressed(GLFW_KEY_DOWN))
+	if (Engine::KeyPressed(GLFW_KEY_DOWN)) 
 		sprite->position.y += PLAYER_VELOCITY * Engine::DeltaTime;
 
 	sprite->position.y = glm::clamp(sprite->position.y,
