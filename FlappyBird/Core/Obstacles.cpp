@@ -31,8 +31,6 @@ void Obstacles::update(E2D::Sprite base) {
 		ObstacleSprite& obstacle{ obstacles[i] };
 		obstacle.up.position.x -= OBSTACLES_VELOCITY * Engine::DeltaTime;
 		obstacle.down.position.x -= OBSTACLES_VELOCITY * Engine::DeltaTime;
-
-		notify(Score::Events::INCREASE);
 		/*if (!player.isLose) {
 			obstacle.up.position.x -= FLAPPY_BIRD_OBSTACLES_VELOCITY * Engine::DeltaTime;
 			obstacle.down.position.x -= FLAPPY_BIRD_OBSTACLES_VELOCITY * Engine::DeltaTime;

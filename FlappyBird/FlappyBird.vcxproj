@@ -149,6 +149,7 @@ xcopy "$(ProjectDir)..\Engine\Shaders" "$(ProjectDir)Shaders" /y /d /e /h /c /i<
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Core\Player.cpp" />
     <ClCompile Include="Core\Subject.cpp" />
     <ClCompile Include="Core\Obstacles.cpp" />
     <ClCompile Include="Core\Score.cpp" />
@@ -157,6 +158,7 @@ xcopy "$(ProjectDir)..\Engine\Shaders" "$(ProjectDir)Shaders" /y /d /e /h /c /i<
   <ItemGroup>
     <ClInclude Include="Core\Observer.h" />
     <ClInclude Include="Core\Obstacles.h" />
+    <ClInclude Include="Core\Player.h" />
     <ClInclude Include="Core\Score.h" />
     <ClInclude Include="Core\Subject.h" />
   </ItemGroup>
